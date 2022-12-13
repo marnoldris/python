@@ -32,23 +32,6 @@ def parse_arg_nums(a):
     return nums
 
 # Get the page number(s) to include
-#number_strings = sys.argv[2].split(',')
-#pages = []
-
-#for s in number_strings:
-#    if '-' not in s:
-#        pages.append(int(s))
-#    else:
-#        interval = s.split('-')
-#        for i in range(2):
-#            interval.append(int(interval[i]))
-#        for i in range(2):
-#            del interval[0]
-#        start = min(interval)
-#        end = max(interval) + 1
-#        for i in range(start, end):
-#            pages.append(i)
-
 pages = parse_arg_nums(2)
 
 # Subtract 1 to turn the page numbers into indices
