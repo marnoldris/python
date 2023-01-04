@@ -61,4 +61,4 @@ if __name__ == '__main__':
 
 if __name__ == '__main__':
     plaintext = b'hey there you.'
-    print(decrypt(encrypt(plaintext)))
+    print(decrypt(encrypt(plaintext)).decode('utf-8'))
