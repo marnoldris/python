@@ -7,7 +7,7 @@ home_dir = os.path.expanduser('~')
 
 if len(sys.argv) != 2:
     print('Usage: pdf_breaker <encrypted pdf>')
-    exit()
+    sys.exit()
 
 # open the dictionary file
 if os.path.exists('dictionary.txt'):
@@ -27,13 +27,13 @@ if pdfReader.isEncrypted:
         # use lower(), upper(), and title()
         if pdfReader.decrypt(word.lower()):
             print(f'Password is {word.lower()}')
-            exit()
+            sys.exit()
         if pdfReader.decrypt(word.upper()):
             print(f'Password is {word.upper()}')
-            exit()
+            sys.exit()
         if pdfReader.decrypt(word.title()):
             print(f'Password is {word.title()}')
-            exit()
+            sys.exit()
 
 else:
     print(f'{sys.argv[1]} is not encrypted')

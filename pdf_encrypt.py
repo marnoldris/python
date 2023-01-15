@@ -32,3 +32,5 @@ pdfWriter.encrypt(sys.argv[2])
 enc_pdf = open(output, 'wb')
 pdfWriter.write(enc_pdf)
 enc_pdf.close()
+
+print('Done!')

@@ -46,6 +46,8 @@ end_page = max(pages)
 output_name = f'{sys.argv[1].split(".")[0]}'
 if len(pages) == 1:
     output_name = output_name + f'_page_{pages[0] + 1}.pdf'
+elif len(pages) > 10:
+    output_name = output_name + f'_trimmed.pdf'
 else:
     output_name = output_name + '_pages_'
     for i in range(len(pages)):
