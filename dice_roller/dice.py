@@ -7,7 +7,7 @@ class Dice:
         """ Initializes a new dice. Takes an integer parameter
             for the number of sides. Default is 12. """
         self.sides = sides
-        self.value = float('nan')
+        self.value = r.randint(1, self.sides)
     
     def roll(self) -> int:
         """ Uses random.randint to simulate rolling the dice.
