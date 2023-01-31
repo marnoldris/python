@@ -4,7 +4,9 @@ import sympy as s
 
 """ Take a function from the user in the form of a string, then turn it
     into a sympy function """
-fct = s.parse_expr(input('Enter the desired function: '))
+fct = s.parse_expr(input('Enter the desired function. Note that symbols '
+                         'must be in Python syntax (i.e. instead of x^2, '
+                         ' enter x**2).\n> '))
 
 """ Get the desired domain """
 x1 = float(input('Enter the start of the desired domain: '))
@@ -32,4 +34,4 @@ for i in range(NUM_STEPS):
 reimann_sum = float('{:0.2f}'.format(round(reimann_sum, PRECISION)))
 
 """ Print the result """
-print(reimann_sum)
+print(f'Area under the curve in the given domain: {reimann_sum}')
