@@ -50,7 +50,7 @@ def game_over_check():
         exit()
 
 print('In this game, you are a zombie trying to get some yummy, yummy brains.'
-      '\nTo start, you roll three dice. Depending on the outcome of each roll,'
+      '\nEach round you roll three dice. Depending on the outcome of each roll,'
       ' you can get a brain, an escapee, or a shotgun.\nIf you accumulate 3'
       ' shotguns, it is game over and you lose all of your brains. If you'
       ' roll an escapee, you can choose to "give chase" and roll again.\nThe'
