@@ -45,7 +45,7 @@ def reroll(dice_obj, rolls):
 def game_over_check():
     if rolls['shotgun'] > 2:
         sleep(0.3)
-        print(f'\nGame over! You scored lost all your brains!')
+        print(f'\nGame over! You lost all your brains!')
         rolls['brains'] = 0
         exit()
 
