@@ -25,8 +25,9 @@ def score(dice_obj, rolls):
         print('You rolled a shotgun! :(')
 
 def reroll(dice_obj, rolls):
-    print(f'\nYou currently have {rolls["brains"]} brain(s),'
-          f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
+    score_report()
+    #print(f'\nYou currently have {rolls["brains"]} brain(s),'
+    #      f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
     question = input('Would you like to reroll one of your escapes? (Y/n)\n')
     if question in yes:
         result = dice_obj.roll()
@@ -48,6 +49,27 @@ def game_over_check():
         print(f'\nGame over! You lost all your brains!')
         rolls['brains'] = 0
         exit()
+
+def score_report():
+    brain_report = ''
+    escape_report = ''
+    shotgun_report = ''
+    if rolls['brains'] == 1:
+        brain_report = '1 brain'
+    else:
+        brain_report = f'{rolls["brains"]} brains'
+    if rolls['escape'] == 1:
+        escape_report = '1 escape'
+    else:
+        escape_report = f'{rolls["escape"]} escapes'
+    if rolls['shotgun'] == 1:
+        shotgun_report = '1 shotgun'
+    else:
+        shotgun_report = f'{rolls["shotgun"]} shotguns'
+
+    print(f'\nYou currently have {brain_report},'
+           f' {escape_report}, and {shotgun_report}.')
+
 
 print('In this game, you are a zombie trying to get some yummy, yummy brains.'
       '\nEach round you roll three dice. Depending on the outcome of each roll,'
@@ -73,9 +95,9 @@ while True:
                 sleep(0.3)
         
         game_over_check()
-        
-        print(f'\nYou currently have {rolls["brains"]} brain(s),'
-              f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
+        score_report()
+        #print(f'\nYou currently have {rolls["brains"]} brain(s),'
+        #      f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
      
     else:
         print(f'\nGame over! You scored {rolls["brains"]} brain(s)!')
