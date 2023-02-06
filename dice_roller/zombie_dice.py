@@ -80,6 +80,7 @@ print('In this game, you are a zombie trying to get some yummy, yummy brains.'
       ' "ahead"!'
 )
 
+
 while True:
     play = input('\nWould you like to roll the dice? (Y/n)\n')
     if play in yes:
@@ -98,7 +99,6 @@ while True:
         score_report()
         #print(f'\nYou currently have {rolls["brains"]} brain(s),'
         #      f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
-     
     else:
-        print(f'\nGame over! You scored {rolls["brains"]} brain(s)!')
+        print(f'\nGame over! You scored {rolls["brains"]} {"brains" if rolls["brains"] != 1 else "brain"}!')
         exit()
