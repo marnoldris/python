@@ -100,5 +100,6 @@ while True:
         #print(f'\nYou currently have {rolls["brains"]} brain(s),'
         #      f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
     else:
-        print(f'\nGame over! You scored {rolls["brains"]} {"brains" if rolls["brains"] != 1 else "brain"}!')
+        print(f'\nGame over! You scored {rolls["brains"]}'
+              f' {"brains" if rolls["brains"] != 1 else "brain"}!')
         exit()
