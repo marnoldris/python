@@ -1,76 +1,73 @@
 #!/usr/bin/python
 
 import dice
-from time import sleep
 
-
+# a list containing the dice needed for the game
 dice_list = [dice.Dice(6), dice.Dice(6), dice.Dice(6)]
 
-yes = ['y', 'Y', '']
-brains = [1, 2, 3]
-escape = [4, 5]
-shotgun = [6]
-rolls = {'brains': 0, 'escape': 0, 'shotgun': 0}
+yes_values = ['y', 'Y', '']   # values that will be considered a "yes"
+brain_values = [1, 2, 3]      # dice values that count as a brain
+escape_values = [4, 5]        # dice values that count as an escape
+shotgun_values = [6]          # dice values that count as a shotgun
+
+# dictionary to track brains, escapes, and shotguns
+score_tracker = {
+    'brains': 0,
+    'escapes': 0,
+    'shotguns': 0,
+}
 
 
-def score(dice_obj, rolls):
+def score(dice_obj):
+    """ Function that takes a dice object and our score tracker
+        dictionary and adds points to the corresponding score
+        based on the value of the dice roll """
     result = dice_obj.roll()
-    if result in brains:
-        rolls['brains'] += 1
+    if result in brain_values:
+        score_tracker['brains'] += 1
         print('You rolled a brain! Yum!')
-    elif result in escape:
+    elif result in escape_values:
         print('You rolled an escaped victim! :o')
     else:
-        rolls['shotgun'] += 1
+        score_tracker['shotguns'] += 1
         print('You rolled a shotgun! :(')
 
-def reroll(dice_obj, rolls):
+def reroll(dice_obj):
+    """ Function for rerolling an 'escaped' dice. """
     score_report()
-    #print(f'\nYou currently have {rolls["brains"]} brain(s),'
-    #      f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
     question = input('Would you like to reroll one of your escapes? (Y/n)\n')
-    if question in yes:
+    if question in yes_values:
         result = dice_obj.roll()
-        while result in escape:
+        while result in escape_values:
             result = dice_obj.roll()
-        if result in brains:
-            rolls['brains'] += 1
+        if result in brain_values:
+            score_tracker['brains'] += 1
             print('You caught the escapee and rolled some brains! :D')
-        elif result in shotgun:
-            rolls['shotgun'] += 1
+        elif result in shotgun_values:
+            score_tracker['shotguns'] += 1
             print('Your escapee lured you into a shotgun trap! :(')
     else:
-        print('You let your victim escape! :v')
-        rolls['escape'] += 1
+        print('\nYou let your victim escape! :v')
+        score_tracker['escapes'] += 1
 
 def game_over_check():
-    if rolls['shotgun'] > 2:
-        sleep(0.3)
+    """ Function that checks if the user has gotten three shotguns, thus losing """
+    if score_tracker['shotguns'] > 2:
         print(f'\nGame over! You lost all your brains!')
-        rolls['brains'] = 0
+        score_tracker['brains'] = 0
         exit()
 
 def score_report():
-    brain_report = ''
-    escape_report = ''
-    shotgun_report = ''
-    if rolls['brains'] == 1:
-        brain_report = '1 brain'
-    else:
-        brain_report = f'{rolls["brains"]} brains'
-    if rolls['escape'] == 1:
-        escape_report = '1 escape'
-    else:
-        escape_report = f'{rolls["escape"]} escapes'
-    if rolls['shotgun'] == 1:
-        shotgun_report = '1 shotgun'
-    else:
-        shotgun_report = f'{rolls["shotgun"]} shotguns'
+    """ Function that prints a score report for the player """
+    print(f'\nYou currently have {score_tracker["brains"]}'
+          f' {"brains" if score_tracker["brains"] != 1 else "brain"},'
+          f' {score_tracker["escapes"]}'
+          f' {"escapes" if score_tracker["escapes"] != 1 else "escape"},'
+          f' and {score_tracker["shotguns"]}'
+          f' {"shotguns" if score_tracker["shotguns"] != 1 else "shotgun"}.'
+    )
 
-    print(f'\nYou currently have {brain_report},'
-           f' {escape_report}, and {shotgun_report}.')
-
-
+""" Print the rules of the game """
 print('In this game, you are a zombie trying to get some yummy, yummy brains.'
       '\nEach round you roll three dice. Depending on the outcome of each roll,'
       ' you can get a brain, an escapee, or a shotgun.\nIf you accumulate 3'
@@ -80,26 +77,22 @@ print('In this game, you are a zombie trying to get some yummy, yummy brains.'
       ' "ahead"!'
 )
 
-
+# Main gameplay loop starts here
 while True:
     play = input('\nWould you like to roll the dice? (Y/n)\n')
-    if play in yes:
-        for d in dice_list:
-            score(d, rolls)
-            sleep(0.3)
+    if play in yes_values:
+        for dice in dice_list:
+            score(dice)
 
         game_over_check()
 
-        for d in dice_list:
-            if d.get_value() in escape:
-                reroll(d, rolls)
-                sleep(0.3)
+        for dice in dice_list:
+            if dice.get_value() in escape_values:
+                reroll(dice)
         
         game_over_check()
         score_report()
-        #print(f'\nYou currently have {rolls["brains"]} brain(s),'
-        #      f' {rolls["escape"]} escape(s), and {rolls["shotgun"]} shotgun(s).')
     else:
-        print(f'\nGame over! You scored {rolls["brains"]}'
-              f' {"brains" if rolls["brains"] != 1 else "brain"}!')
+        print(f'\nGame over! You scored {score_tracker["brains"]}'
+              f' {"brains" if score_tracker["brains"] != 1 else "brain"}!')
         exit()
