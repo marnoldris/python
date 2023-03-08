@@ -11,9 +11,9 @@ if len(sys.argv) < 2:
     sys.exit()
 
 if '-v' in sys.argv:
-    verbose_flag = 1
+    verbose_flag = True
 else:
-    verbose_flag = 0
+    verbose_flag = False
 
 # open the dictionary file
 if os.path.exists('dictionary.txt'):
@@ -38,7 +38,7 @@ pdfReader = PyPDF2.PdfFileReader(pdf_file_name, 'rb')
 
 # Print a message warning that verbose has been selected, then count down
 # to start.
-if verbose_flag == 1:
+if verbose_flag:
     print('Verbose flag detected, test words will be printed as they\'re '
           'used.'
     )
@@ -54,15 +54,15 @@ if verbose_flag == 1:
 if pdfReader.isEncrypted:
     for word in test_words:
         # use lower(), upper(), and title()
-        if verbose_flag == 1: print(word.lower())
+        print(word.lower()) if verbose_flag else None
         if pdfReader.decrypt(word.lower()):
             print(f'Password is {word.lower()}')
             sys.exit()
-        if verbose_flag == 1: print(word.upper())
+        print(word.upper()) if verbose_flag else None
         if pdfReader.decrypt(word.upper()):
             print(f'Password is {word.upper()}')
             sys.exit()
-        if verbose_flag == 1: print(word.title())
+        print(word.title()) if verbose_flag else None
         if pdfReader.decrypt(word.title()):
             print(f'Password is {word.title()}')
             sys.exit()
