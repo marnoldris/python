@@ -54,15 +54,16 @@ if verbose_flag:
 if pdfReader.isEncrypted:
     for word in test_words:
         # use lower(), upper(), and title()
-        print(word.lower()) if verbose_flag else None
+        if verbose_flag:
+            print(f'{word.lower()}   |   {word.upper()}   |   {word.title()}'
+            )
         if pdfReader.decrypt(word.lower()):
             print(f'Password is {word.lower()}')
             sys.exit()
-        print(word.upper()) if verbose_flag else None
+        # print(word.upper()) if verbose_flag else None
         if pdfReader.decrypt(word.upper()):
             print(f'Password is {word.upper()}')
             sys.exit()
-        print(word.title()) if verbose_flag else None
         if pdfReader.decrypt(word.title()):
             print(f'Password is {word.title()}')
             sys.exit()
