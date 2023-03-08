@@ -15,6 +15,8 @@ if os.path.exists('dictionary.txt'):
 else:
     dict_file = open(f'{home_dir}/Documents/dictionary.txt')
 dict_words = dict_file.readlines()
+dict_file.close()
+
 test_words = []
 for word in dict_words:
     test_words.append(word.strip())

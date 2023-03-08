@@ -12,9 +12,11 @@ home_dir = os.path.expanduser('~')
 # Split the file name on the file extension dot and append
 # _enc.pdf in its place
 output = f'{sys.argv[1].split(".")[0]}' + '_enc.pdf'
+
+yes_values = ['', 'Y', 'y']
 if os.path.exists(output):
-    cont = input('Encrypted filename already exists, overwrite? (Y/n)')
-    if cont == '' or cont == 'y' or cont == 'Y':
+    cont = input('Encrypted filename already exists, overwrite? (Y/n): ')
+    if cont in yes_values:
         print('Overwriting...')
     else:
         print('Cancelling...')
