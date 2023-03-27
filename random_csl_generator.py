@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 import random
 import pyperclip
@@ -13,7 +14,7 @@ upper = max(bounds)
 
 random_numbers = [random.randint(lower, upper) for i in range(number_of_numbers)]
 
-output = ','.join(str(i) for i in random_numbers)
+output = ', '.join(str(i) for i in random_numbers)
 
 print('\n\nRandom numbers: ', end='\n\n')
 print(output)
