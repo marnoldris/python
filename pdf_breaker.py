@@ -7,7 +7,7 @@ from time import sleep
 home_dir = os.path.expanduser('~')
 
 if len(sys.argv) < 2:
-    print('Usage: pdf_breaker <encrypted pdf>')
+    print('Usage: pdf_breaker <optional -v> <encrypted pdf>')
     sys.exit()
 
 if '-v' in sys.argv:

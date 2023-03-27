@@ -6,7 +6,8 @@ import sympy as s
     into a sympy function """
 fct = s.parse_expr(input('Enter the desired function. Note that symbols '
                          'must be in Python syntax (i.e. instead of x^2, '
-                         ' enter x**2).\n> '))
+                         ' enter x**2).\n> '
+))
 
 """ Get the desired domain """
 x1 = float(input('Enter the start of the desired domain: '))
