@@ -34,4 +34,4 @@ print(output)
 
 pyperclip.copy(output)
 print()
-print('List has been copied to clipboard.')
+print('The set has been copied to your clipboard.')
