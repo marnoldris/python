@@ -33,11 +33,11 @@ def print_instruction_board():
     for i in board:
         print(i)
 
-def replace_value(old, new):
+def replace_value(old_value, new_value):
     for row in range(len(board)):
         for column in range(len(board[row])):
-            if board[row][column] == old:
-                board[row][column] = new
+            if board[row][column] == old_value:
+                board[row][column] = new_value
                 break    # break us out of the for loop once we find the target
                 
 print_instruction_board()

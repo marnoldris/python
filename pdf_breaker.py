@@ -50,6 +50,31 @@ if verbose_flag:
     print('            1...')
     sleep(1)
 
+# Function to test the words with and without appended numbers
+def try_word(word):
+    if pdfReader.decrypt(word):
+        print(f'Password is {word}')
+        sys.exit
+    for i in range(10):
+        wordn = word + str(i)
+        if pdfReader.decrypt(wordn):
+            print(f'Password is {wordn}')
+            sys.exit()
+    for i in range(10):
+        for j in range(10):
+            wordnn = word + str(i) + str(j)
+            if pdfReader.decrypt(wordnn):
+                print(f'Password is {wordnn}')
+                sys.exit()
+    for i in range(10):
+        for j in range(10):
+            for k in range(10):
+                wordnnn = word + str(i) + str(j) + str(k)
+                if pdfReader.decrypt(wordnnn):
+                    print(f'Password is {wordnnn}')
+                    sys.exit()
+        
+
 # Start crackin'!
 if pdfReader.isEncrypted:
     for word in test_words:
@@ -57,6 +82,10 @@ if pdfReader.isEncrypted:
         if verbose_flag:
             print(f'{word.lower()}   |   {word.upper()}   |   {word.title()}'
             )
+        try_word(word.lower())
+        try_word(word.upper())
+        try_word(word.title())
+        """
         if pdfReader.decrypt(word.lower()):
             print(f'Password is {word.lower()}')
             sys.exit()
@@ -67,6 +96,7 @@ if pdfReader.isEncrypted:
         if pdfReader.decrypt(word.title()):
             print(f'Password is {word.title()}')
             sys.exit()
+        """
 
 else:
     print(f'{sys.argv[1]} is not encrypted')
