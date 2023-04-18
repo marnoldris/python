@@ -21,9 +21,12 @@ last_entry = ''
 color_entry = ''
 
 deck_size = 0
-while deck_size == 0:
+while deck_size <= 0:
     try:
         deck_size = int(input('Enter the number of cards in the deck: '))
+        if deck_size < 1:
+            print('Please enter a positive integer greater than 0.')
+            continue
     except ValueError:
         print('Invalid entry, please enter an integer number of cards.')
     else:
