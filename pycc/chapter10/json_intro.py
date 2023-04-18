@@ -2,7 +2,7 @@
 import os, pdb
 import json
 
-pdb.set_trace()
+#pdb.set_trace()
 numbers = [i**i for i in range(10)]
 
 pokedex = {
