@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import math
+import math, sys
 ##import pdb;pdb.set_trace()
 
 colors = {
@@ -95,13 +95,13 @@ while True:
     except (KeyboardInterrupt, KeyError) as e:
         if isinstance(e, KeyError):
             print('Invalid entry.')
-        else:
+        elif isinstance(e, KeyboardInterrupt):
             ## Print tally and recommendation, then quit
             print()
             for color, count in colors.items():
                 print(f'{color.title()}: {count}')
             calc_colors()
-            quit()
+            sys.exit()
 
 ## Print tally and recommendation
 print()
