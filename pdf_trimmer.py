@@ -21,8 +21,13 @@ def parse_arg_nums(a):
             nums.append(int(s))
         else:
             interval = s.split('-')
-            for i in range(2):
-                interval.append(int(interval[i]))
+            # Change the strings into integers
+            try:
+                for i in range(2):
+                    interval.append(int(interval[i]))            
+            except ValueError:
+                print('Negative indexing not supported, exiting...')
+                exit()
             for i in range(2):
                 del interval[0]
             start = min(interval)
@@ -32,28 +37,28 @@ def parse_arg_nums(a):
     return nums
 
 # Get the page number(s) to include
-pages = parse_arg_nums(2)
+page_nums = parse_arg_nums(2)
 
 # Subtract 1 to turn the page numbers into indices
-for i in range(len(pages)):
-    pages[i] = pages[i] - 1
+for i in range(len(page_nums)):
+    page_nums[i] = page_nums[i] - 1
 
-end_page = max(pages)
+end_page = max(page_nums)
 
 # Split the file name on the file extension dot and append
 # the trimmed page numbers, ending with the .pdf extension
 output_name = f'{sys.argv[1].split(".")[0]}'
-if len(pages) == 1:
-    output_name = output_name + f'_page_{pages[0] + 1}.pdf'
-elif len(pages) > 10:
+if len(page_nums) == 1:
+    output_name = output_name + f'_page_{page_nums[0] + 1}.pdf'
+elif len(page_nums) > 10:
     output_name = output_name + f'_trimmed.pdf'
 else:
     output_name = output_name + '_pages_'
-    for i in range(len(pages)):
-        if i + 1 < len(pages):
-            output_name = output_name + f'{pages[i] + 1}_'
+    for i in range(len(page_nums)):
+        if i + 1 < len(page_nums):
+            output_name = output_name + f'{page_nums[i] + 1}_'
         else:
-            output_name = output_name + f'{pages[i] + 1}.pdf'
+            output_name = output_name + f'{page_nums[i] + 1}.pdf'
 
 # Check to see if the file exists, confirm overwrite if it does
 if os.path.exists(output_name):
@@ -69,17 +74,21 @@ orig_pdf = open(sys.argv[1], 'rb')
 pdf_reader = PyPDF2.PdfFileReader(orig_pdf)
 
 # Make sure the requested pages exist in the original PDF
-if (end_page + 1) > pdf_reader.numPages:
+if (end_page + 1) > len(pdf_reader.pages):
     print('Requested page(s) are out of range, exiting...')
     exit()
+for num in page_nums:
+    if num < 0:
+        print('Requested page(s) are out of range, exiting...')
+        exit()
 
 # Create the writer
 pdf_writer = PyPDF2.PdfFileWriter()
 
 # Copy the desired pages
-for page in pages:
-    page_obj = pdf_reader.getPage(page)
-    pdf_writer.addPage(page_obj)
+for num in page_nums:
+    page_obj = pdf_reader.pages[num]
+    pdf_writer.add_page(page_obj)
 
 # Open a blank pdf with the given file name and write the pages.
 output_pdf = open(output_name, 'wb')
