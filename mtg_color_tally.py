@@ -20,6 +20,7 @@ blue_values = ['u', 'U', 'blue', 'Blue']
 last_entry = ''
 color_entry = ''
 
+print()
 deck_size = 0
 while deck_size <= 0:
     try:
@@ -55,20 +56,30 @@ def calc_colors():
     print()
     num_colors = 0
     color_sum = 0
+    color_total = 0
     ## Count the number of colors that have any entries
     for k, v in colors.items():
         if v > 0:
             num_colors += 1
             color_sum += v
 
-    ## Normalize the numbers of each color to 100 and print
-    ## the result.
+    ## Normalize the numbers of each color to 100 and print the result.
     for k, v in colors.items():
         if v > 0:
-            percentage = v * 100 / color_sum
-            print(f'{k.title()}: {math.ceil(percentage)}%')
-            print(f'{k.title()} sources: {math.ceil(percentage * num_lands/100)}', end='\n\n')
-    print(f'Total number of recommended lands: {num_lands}.')
+            color_percent = v * 100 / color_sum
+            color_sources = math.ceil(color_percent * num_lands/100)
+            color_total += color_sources
+            print(f'{k.title()}: {math.ceil(color_percent)}%')
+            print(f'{k.title()} sources: {color_sources}', end='\n\n')
+
+    print(f'Total number of recommended lands: {color_total}.')
+
+def print_totals():
+    print('\n------------------------')
+    for color, count in colors.items():
+        if count > 0:
+            print(f'{color.title()}: {count}')
+    
 
 ## Print instructions   
 print(
@@ -97,14 +108,10 @@ while True:
             print('Invalid entry.')
         elif isinstance(e, KeyboardInterrupt):
             ## Print tally and recommendation, then quit
-            print()
-            for color, count in colors.items():
-                print(f'{color.title()}: {count}')
+            print_totals()
             calc_colors()
             sys.exit()
 
 ## Print tally and recommendation
-print()
-for color, count in colors.items():
-    print(f'{color.title()}: {count}')
+print_totals()
 calc_colors()

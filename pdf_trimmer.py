@@ -38,7 +38,6 @@ pages = parse_arg_nums(2)
 for i in range(len(pages)):
     pages[i] = pages[i] - 1
 
-start_page = min(pages)
 end_page = max(pages)
 
 # Split the file name on the file extension dot and append
