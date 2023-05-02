@@ -84,7 +84,7 @@ def print_totals() -> None:
 print(
 """
 Welcome to the MTG color tally and mana calculator.
-Enter the color you'd like to add to the tally (w, b, r, g, u),
+Enter the color you'd like to add to the tally (w, u, b, r, g),
 or q to quit. If you want to repeat the last tally, just press return.
 """
 )
