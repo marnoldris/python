@@ -4,17 +4,17 @@ import math, sys
 
 colors = {
     'white': 0,
+    'blue': 0,
     'black': 0,
     'red': 0,
     'green': 0,
-    'blue': 0,
     }
 
 white_values = ['w', 'W', 'white', 'White']
+blue_values = ['u', 'U', 'blue', 'Blue']
 black_values = ['b', 'B', 'black', 'Black']
 red_values = ['r', 'R', 'red', 'Red']
 green_values = ['g', 'G', 'green', 'Green']
-blue_values = ['u', 'U', 'blue', 'Blue']
 
 last_entry = ''
 color_entry = ''
@@ -37,6 +37,9 @@ def add_color(color_string) -> str:
     if color_string in white_values:
         colors['white'] += 1
         color_added = 'white'
+    elif color_string in blue_values:
+        colors['blue'] += 1
+        color_added = 'blue'
     elif color_string in black_values:
         colors['black'] += 1
         color_added = 'black'
@@ -46,9 +49,6 @@ def add_color(color_string) -> str:
     elif color_string in green_values:
         colors['green'] += 1
         color_added = 'green'
-    elif color_string in blue_values:
-        colors['blue'] += 1
-        color_added = 'blue'
     return color_added
 
 def calc_colors():
