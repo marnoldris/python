@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import math, sys
-##import pdb;pdb.set_trace()
 
 colors = {
     'white': 0,
@@ -74,7 +73,7 @@ def calc_colors():
 
     print(f'Total number of recommended lands: {color_total}.')
 
-def print_totals():
+def print_totals() -> None:
     print('\n------------------------')
     for color, count in colors.items():
         if count > 0:
@@ -83,7 +82,8 @@ def print_totals():
 
 ## Print instructions   
 print(
-"""Welcome to the MTG color tally and mana calculator.
+"""
+Welcome to the MTG color tally and mana calculator.
 Enter the color you'd like to add to the tally (w, b, r, g, u),
 or q to quit. If you want to repeat the last tally, just press return.
 """
@@ -107,10 +107,7 @@ while True:
         if isinstance(e, KeyError):
             print('Invalid entry.')
         elif isinstance(e, KeyboardInterrupt):
-            ## Print tally and recommendation, then quit
-            print_totals()
-            calc_colors()
-            sys.exit()
+            break
 
 ## Print tally and recommendation
 print_totals()
