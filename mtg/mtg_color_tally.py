@@ -17,7 +17,6 @@ red_values = ['r', 'R', 'red', 'Red']
 green_values = ['g', 'G', 'green', 'Green']
 
 last_entry = ''
-color_entry = ''
 
 print()
 deck_size = 0
