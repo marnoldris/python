@@ -38,7 +38,11 @@ if len(sys.argv) == 3:
     try:
         copy_columns(decklist, int(sys.argv[2]))
     except TypeError:
-        print('Invalid entry for total width, defaulting to 79...')
-        copy_columns(decklist, 79)
+        print('Invalid entry for total width, defaulting to console width...')
+        copy_columns(decklist)
 else:
-    copy_columns(decklist, 79)
+    print(
+        'Desired width not included, defaulting to console width...',
+        end='\n\n'
+    )
+    copy_columns(decklist)
