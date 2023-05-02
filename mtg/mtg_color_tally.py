@@ -77,7 +77,7 @@ def print_totals() -> None:
     print('\n------------------------')
     for color, count in colors.items():
         if count > 0:
-            print(f'{color.title()}: {count}')
+            print(f'{color.title():<5}: {count}')
     
 
 ## Print instructions   
