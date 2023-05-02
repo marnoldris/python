@@ -33,7 +33,8 @@ while deck_size <= 0:
         num_lands = math.ceil(deck_size * 0.41)
 
 def add_color(color_string) -> str:
-    color_added = ''
+    """ Function to add one to the desired color tally. Returns a string
+so the last color added is tracked. """
     if color_string in white_values:
         colors['white'] += 1
         color_added = 'white'
@@ -51,7 +52,8 @@ def add_color(color_string) -> str:
         color_added = 'green'
     return color_added
 
-def calc_colors():
+def calc_colors() -> None:
+    """ Function for calculating a recommendation for mana distribution. """
     print()
     num_colors = 0
     color_sum = 0
@@ -74,6 +76,7 @@ def calc_colors():
     print(f'Total number of recommended lands: {color_total}.')
 
 def print_totals() -> None:
+    """ Function to pretty print the tally totals. """
     print('\n------------------------')
     for color, count in colors.items():
         if count > 0:
