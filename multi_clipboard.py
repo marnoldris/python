@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import pyperclip, sys, json, os
-#import pyautogui
+import pyautogui
 
 filename = f'{os.path.expanduser("~")}/clipboard_dict.json'
 
@@ -23,6 +23,12 @@ def add_new(position, dictionary, value=pyperclip.paste()) -> None:
     with open(filename, 'w') as f:
         output = json.dumps(dictionary, indent=4)
         f.write(output)
+
+def paste_output():
+    pyautogui.keyUp('ctrlleft')
+    pyautogui.keyUp('winleft')
+    pyautogui.keyUp(sys.argv[1])
+    pyautogui.hotkey('ctrl','v')
 
 if len(sys.argv) < 2:
     print(
@@ -46,7 +52,7 @@ if sys.argv[1] == '-a':
 elif sys.argv[1] != '-a':
     try:
         pyperclip.copy(f'{text_outputs[sys.argv[1]]}')
-##        pyautogui.hotkey('ctrl','v')
+        paste_output()
     except KeyError as e:
         print(f'Index "{sys.argv[1]}" is invalid, please provide a valid index.\n Exiting...')
         sys.exit()
