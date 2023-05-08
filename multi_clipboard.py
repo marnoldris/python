@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import pyperclip, sys, json, os, pyautogui
+import pyperclip, sys, json, os
+#import pyautogui
 
 filename = f'{os.path.expanduser("~")}/clipboard_dict.json'
 
