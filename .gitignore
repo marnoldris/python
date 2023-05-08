@@ -3,3 +3,4 @@ key.pri
 __pycache__
 effectiveawk.pdf
 *_decklist.txt
+clipboard_dict.json
