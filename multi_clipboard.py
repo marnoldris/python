@@ -12,7 +12,8 @@ except FileNotFoundError:
     print('Dictionary file not found, creating new...')
     clipboard_dict = {'1': '','2':'','3':'','4':'','5':'','6':'','7':'','8':'','9':'','0':''}
     with open(filename, 'w') as f:
-        json.dump(clipboard_dict, f)
+        output = json.dumps(clipboard_dict, indent=4)
+        f.write(output)
     with open(filename) as f:
         text_outputs = json.load(f)
 
@@ -20,7 +21,8 @@ def add_new(position, dictionary, value=pyperclip.paste()) -> None:
 ##    dictionary[position] = value.strip()
     dictionary[position] = value
     with open(filename, 'w') as f:
-        json.dump(dictionary, f)
+        output = json.dumps(dictionary, indent=4)
+        f.write(output)
 
 if len(sys.argv) < 2:
     print(
