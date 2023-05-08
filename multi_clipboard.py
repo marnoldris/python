@@ -16,7 +16,7 @@ except FileNotFoundError:
         text_outputs = json.load(f)
 
 def add_new(position, dictionary, value=pyperclip.paste()) -> None:
-##  dictionary[position] = value.strip()
+##    dictionary[position] = value.strip()
     dictionary[position] = value
     with open(filename, 'w') as f:
         json.dump(dictionary, f)
@@ -43,7 +43,7 @@ if sys.argv[1] == '-a':
 elif sys.argv[1] != '-a':
     try:
         pyperclip.copy(f'{text_outputs[sys.argv[1]]}')
-        pyautogui.hotkey('ctrl','v')
+##        pyautogui.hotkey('ctrl','v')
     except KeyError as e:
         print(f'Index "{sys.argv[1]}" is invalid, please provide a valid index.\n Exiting...')
         sys.exit()
