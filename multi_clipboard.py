@@ -14,18 +14,25 @@ except FileNotFoundError:
         text_outputs = json.load(f)
 
 def add_new(position, dictionary, value=pyperclip.paste()) -> None:
-##    concat_list = ['"""', value, '"""']
-##    new_value = ''.join(concat_list)
-    new_value = value
-    dictionary[position] = new_value
+    dictionary[position] = value
     with open('clipboard_dict.json', 'w') as f:
         json.dump(dictionary, f)
 
 if len(sys.argv) < 2:
-    print('Please include arguments')
+    print(
+        """
+Please include arguments.
+To copy from the dictionary: $ multi_clipboard.py <position (0-9)>
+To add a new entry to the dictionary: $ multi_clipboard.py <position (0-9)> -a <value (optional)>
+   Note: if value is not included, the script will take the contents of the clipboard.
+        """
+    )
     sys.exit()
 
 if sys.argv[1] == '-a':
+    if len(sys.argv) < 3:
+        print('Please add the position to add the value to (0-9).\nExiting...')
+        sys.exit()
     try:
         add_new(sys.argv[2], text_outputs, sys.argv[3])
     except IndexError as e:
