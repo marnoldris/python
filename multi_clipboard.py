@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import pyperclip, sys, json, os
+import pyperclip, sys, json, os, pyautogui
 
 filename = f'{os.path.expanduser("~")}/clipboard_dict.json'
 
@@ -43,6 +43,7 @@ if sys.argv[1] == '-a':
 elif sys.argv[1] != '-a':
     try:
         pyperclip.copy(f'{text_outputs[sys.argv[1]]}')
+        pyautogui.hotkey('ctrl','v')
     except KeyError as e:
         print(f'Index "{sys.argv[1]}" is invalid, please provide a valid index.\n Exiting...')
         sys.exit()
