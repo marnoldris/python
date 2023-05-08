@@ -1,21 +1,24 @@
 #!/usr/bin/python
 
-import pyperclip, sys, json
+import pyperclip, sys, json, os
+
+filename = f'{os.path.expanduser("~")}/clipboard_dict.json'
 
 try:
-    with open('clipboard_dict.json') as f:
+    with open(filename) as f:
         text_outputs = json.load(f)
 except FileNotFoundError:
     print('Dictionary file not found, creating new...')
     clipboard_dict = {'1': '','2':'','3':'','4':'','5':'','6':'','7':'','8':'','9':'','0':''}
-    with open('clipboard_dict.json', 'w') as f:
+    with open(filename, 'w') as f:
         json.dump(clipboard_dict, f)
-    with open('clipboard_dict.json') as f:
+    with open(filename) as f:
         text_outputs = json.load(f)
 
 def add_new(position, dictionary, value=pyperclip.paste()) -> None:
+##  dictionary[position] = value.strip()
     dictionary[position] = value
-    with open('clipboard_dict.json', 'w') as f:
+    with open(filename, 'w') as f:
         json.dump(dictionary, f)
 
 if len(sys.argv) < 2:
