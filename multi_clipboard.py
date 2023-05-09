@@ -24,9 +24,16 @@ def add_new(position, dictionary, value=pyperclip.paste()) -> None:
         output = json.dumps(dictionary, indent=4)
         f.write(output)
 
-def paste_output():
-    pyautogui.keyUp('ctrlleft')
-    pyautogui.keyUp('winleft')
+def copy_selected() -> None:
+    pyautogui.keyUp('ctrl')
+    pyautogui.keyUp('win')
+    pyautogui.keyUp('shift')
+    pyautogui.keyUp(sys.argv[1])
+    pyautogui.hotkey('ctrl','c')
+
+def paste_output() -> None:
+    pyautogui.keyUp('ctrl')
+    pyautogui.keyUp('win')
     pyautogui.keyUp(sys.argv[1])
     pyautogui.hotkey('ctrl','v')
 
@@ -48,6 +55,7 @@ if sys.argv[1] == '-a':
     try:
         add_new(sys.argv[2], text_outputs, sys.argv[3])
     except IndexError as e:
+##        copy_selected()
         add_new(sys.argv[2], text_outputs)
 elif sys.argv[1] != '-a':
     try:
