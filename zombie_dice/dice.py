@@ -19,11 +19,11 @@ class Dice:
         """ Returns the current value of the dice (integer). """
         return self.value
 
-    def print_value(self):
+    def print_value(self) -> None:
         """ Prints a nicely formatted string with the current value. """
         print(f'The value of the dice is {self.value}')
 
-    def set_value(self, new_value):
+    def set_value(self, new_value) -> None:
         """ Sets the value of the dice to a specific number.
             Takes an integer for the new value. """
         if new_value > self.sides or new_value < 1:
@@ -35,7 +35,7 @@ class Dice:
         """ Returns the number of sides of the dice (integer). """
         return self.sides
 
-    def set_sides(self, new_sides):
+    def set_sides(self, new_sides) -> None:
         """ Sets the number of sides of the dice.
             Takes an integer for the new number of sides. """
         if new_sides < 1:

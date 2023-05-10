@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import pyperclip, sys, json, os
+from time import sleep
 import pyautogui    ## Optional for automatic pasting.
 
 ## File name for our dictionary; it should be stored in the user's home folder.
@@ -18,7 +19,7 @@ except FileNotFoundError:
     with open(filename) as f:
         clipboard_dict = json.load(f)
 
-def change_value(position, dictionary, value=pyperclip.paste()) -> None:
+def change_value(position, dictionary, value) -> None:
     """ Changes the value at a given key in the dictionary. Defaults to using the current clipboard contents. """
 ##    dictionary[position] = value.strip()      ## Not sure if I want to strip whitespace tbh.
     dictionary[position] = value
@@ -35,7 +36,7 @@ keyUp() is used to free up the keys when this is used as a shortcut.
     pyautogui.keyUp('win')
     pyautogui.keyUp('shift')
     pyautogui.keyUp(sys.argv[1])
-    pyautogui.hotkey('ctrl','c')
+    pyautogui.hotkey('ctrl','insert')
 
 def paste_output() -> None:
     """ Function to paste the clipboard contents. keyUp() is used to free up the keys when this is used as a shortcut. """
@@ -66,8 +67,9 @@ if sys.argv[1] == '-a':
         change_value(sys.argv[2], clipboard_dict, sys.argv[3])
     except IndexError as e:
         ## If no value is included, default to using the current clipboard contents.
-##        copy_selected()
-        change_value(sys.argv[2], clipboard_dict)
+        copy_selected()
+        clipboard_contents = pyperclip.paste()
+        change_value(sys.argv[2], clipboard_dict, clipboard_contents)
         
 ## If the only argument is a key, grab the value and paste it.
 elif sys.argv[1] != '-a':
