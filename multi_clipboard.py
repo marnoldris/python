@@ -28,9 +28,7 @@ def change_value(position, dictionary, value) -> None:
 
 def copy_selected() -> None:
     """
-Attempt at having the program copy selected text to clipboard when the program runs.
-I think there is an issue being caused by the ctrl+c running on Linux killing the program.
-keyUp() is used to free up the keys when this is used as a shortcut.
+Copies the selected text to the clipboard when the program runs.
     """
     pyautogui.keyUp('ctrl')
     pyautogui.keyUp('win')
@@ -43,7 +41,7 @@ def paste_output() -> None:
     pyautogui.keyUp('ctrl')
     pyautogui.keyUp('win')
     pyautogui.keyUp(sys.argv[1])
-    pyautogui.hotkey('ctrl','v')
+    pyautogui.hotkey('shift','insert')
 
 ## Usage warning in case arguments are not provided.
 if len(sys.argv) < 2:
