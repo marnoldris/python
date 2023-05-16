@@ -1,16 +1,20 @@
 #!/usr/bin/python
 
-import os, sys, PyPDF2
+import os
+import sys
+import PyPDF2
 
 # Check to make sure the user is running the program correctly
 if len(sys.argv) != 3:
-    print('Usage: pdf_trimmer <input pdf> <pages n,m,o-q,etc>\n\n'
-          'Page numbers should be separated by a comma (no space)'
-          ', can be duplicated, and will be kept in the order '
-          'given.\n\n'
-          'Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2'
+    print(
+        'Usage: pdf_trimmer <input pdf> <pages n,m,o-q,etc>\n\n'
+        'Page numbers should be separated by a comma (no space)'
+        ', can be duplicated, and will be kept in the order '
+        'given.\n\n'
+        'Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2'
     )
     exit()
+
 
 def parse_arg_nums(a):
     number_strings = sys.argv[a].split(',')
@@ -24,7 +28,7 @@ def parse_arg_nums(a):
             # Change the strings into integers
             try:
                 for i in range(2):
-                    interval.append(int(interval[i]))            
+                    interval.append(int(interval[i]))
             except ValueError:
                 print('Negative indexing not supported, exiting...')
                 exit()
@@ -35,6 +39,7 @@ def parse_arg_nums(a):
             for i in range(start, end):
                 nums.append(i)
     return nums
+
 
 # Get the page number(s) to include
 page_nums = parse_arg_nums(2)
@@ -51,7 +56,7 @@ output_name = f'{sys.argv[1].split(".")[0]}'
 if len(page_nums) == 1:
     output_name = output_name + f'_page_{page_nums[0] + 1}.pdf'
 elif len(page_nums) > 10:
-    output_name = output_name + f'_trimmed.pdf'
+    output_name = output_name + '_trimmed.pdf'
 else:
     output_name = output_name + '_pages_'
     for i in range(len(page_nums)):

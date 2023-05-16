@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-import math, sys
+import math
 
 colors = {
     'white': 0,
-    'blue': 0,
+    'blue':  0,
     'black': 0,
-    'red': 0,
+    'red':   0,
     'green': 0,
     }
 
@@ -38,13 +38,13 @@ so the last color added is tracked. """
         colors['white'] += 1
         color_added = 'white'
     elif color_string in blue_values:
-        colors['blue'] += 1
+        colors['blue']  += 1
         color_added = 'blue'
     elif color_string in black_values:
         colors['black'] += 1
         color_added = 'black'
     elif color_string in red_values:
-        colors['red'] += 1
+        colors['red']   += 1
         color_added = 'red'
     elif color_string in green_values:
         colors['green'] += 1
@@ -54,8 +54,8 @@ so the last color added is tracked. """
 def calc_colors() -> None:
     """ Function for calculating a recommendation for mana distribution. """
     print()
-    num_colors = 0
-    color_sum = 0
+    num_colors =  0
+    color_sum =   0
     color_total = 0
     ## Count the number of colors that have any entries
     for k, v in colors.items():
