@@ -87,10 +87,10 @@ if sys.argv[1] == '-a':
     if len(sys.argv) < 3:
         print('Please add the position to add the value to (0-9).\nExiting...')
         sys.exit()
-    try:
+    if len(sys.argv) == 4:
         # If a value is included as an argument, use it.
         change_value(sys.argv[2], clipboard_dict, sys.argv[3])
-    except IndexError:
+    elif len(sys.argv) == 3:
         # If no value is included, default to using the current
         # clipboard contents.
         copy_selected()
