@@ -1,38 +1,46 @@
 #!/usr/bin/python
 
-import os, sys
+import os
+import sys
 import PyPDF2
 
+# %% Checking for args
 if len(sys.argv) != 3:
-    print('Usage: pdf_encrypt <unencrypted pdf> <password>')
-    exit()
+    print("Usage: pdf_encrypt <unencrypted pdf> <password>")
+    sys.exit()
+# %% Finding the home path
+home_dir = os.path.expanduser("~")
 
-home_dir = os.path.expanduser('~')
-
+# %% Set up the output name
 # Split the file name on the file extension dot and append
 # _enc.pdf in its place
-output = f'{sys.argv[1].split(".")[0]}' + '_enc.pdf'
+output = f'{sys.argv[1].split(".")[0]}' + "_enc.pdf"
 
-yes_values = ['', 'Y', 'y']
+# %% Check if the file exists and asking to overwrite
+yes_values = ["", "Y", "y"]
 if os.path.exists(output):
-    cont = input('Encrypted filename already exists, overwrite? (Y/n): ')
+    cont = input("Encrypted filename already exists, overwrite? (Y/n): ")
     if cont in yes_values:
-        print('Overwriting...')
+        print("Overwriting...")
     else:
-        print('Cancelling...')
-        exit()
+        print("Cancelling...")
+        sys.exit()
 
-pdfFile = open(sys.argv[1], 'rb')
+# %% Open the source file and set up the reader
+pdfFile = open(sys.argv[1], "rb")
 pdfReader = PyPDF2.PdfFileReader(pdfFile)
 pdfWriter = PyPDF2.PdfFileWriter()
 
+# %% Build the new, encrypted PDF
 for page_num in range(pdfReader.numPages):
     pdfWriter.addPage(pdfReader.getPage(page_num))
 
+# %% Write the encrypted PDF
 pdfWriter.encrypt(sys.argv[2])
 
-enc_pdf = open(output, 'wb')
+enc_pdf = open(output, "wb")
 pdfWriter.write(enc_pdf)
 enc_pdf.close()
 
-print('Done!')
+# %% Huzzah!
+print("Done!")

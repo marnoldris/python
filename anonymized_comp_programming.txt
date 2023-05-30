@@ -1,0 +1,49 @@
+Strengths: <name> has shown great growth in his problem solving skills.
+
+Opportunities for Growth: <name> gets distracted by technology and his friends during class fairly easily. 
+
+Strengths: <name> has shown great improvement in his willingness to tackle programming problems, and has been very successful in solving them.
+
+Opportunities for Growth: <name> tends to get distracted easily by his friends in the class.
+
+Strengths: <name> has shown great growth in her willingness to tackle programming problems, and has been successful in solving them.
+
+Opportunities for Growth: <name> could benefit from collaborating more with her classmates when working through problems.
+
+Strengths: <name> has shown massive growth in his willingness to participate in class discussions.
+
+Opportunities for Growth: <name> can get distracted by technology, leading him to be off-task when working on harder problems.
+
+Strengths: <name> consistently practices flexible thinking strategies when solving programmatic problems. <name> typically just needs a little bump in the right direction to make progress.
+
+Opportunities for Growth: <name> can get distracted by technology, leading him to be off-task when working on harder problems.
+
+Strengths: <name> has been spending class time much more effectively for self-study to catch up in the class.
+
+Opportunities for Growth: <name> could benefit from some additional time outside of class to help catch up for the Spring semester.
+
+Strengths: The confidence that <name> has fostered in Math class shines through in his willingness to try new concepts in Python.
+
+Opportunities for Growth: <name> tends to get distracted easily by some of his classmates.
+
+Strengths: <name> has a lot of interest and potential in programming; his self study time has been used more effectively lately and it shows in his understanding of Python.
+
+Opportunities for Growth: <name> could use some extra, focused self study time. It would also benefit him to meet with me occasionally to help stay on track.
+
+Strengths: <name> very quickly implements new concepts and faces programming challenges head-on.
+
+Opportunities for Growth: <name> typically finishes assignments early during class, and could practice his leadership skills by assisting and coaching other students.
+
+Strengths: <name> has shown great improvement in his programmatic problem solving skills.
+
+Opportunities for Growth: <name> tends to get a bit distracted by some of his classmates if he is not actively engaged in a problem.
+
+Strengths: <name> is an active participant in class and has a passion for Computer Science.
+
+Opportunities for Growth: <name> has great potential in programming, but struggles with preparedness and has fallen behind on some of the assignments. She could catch up quickly with some focused study and after school meetings.
+
+Strengths: <name> has shown great improvement in his programming and problem solving skills. 
+
+Opportunities for Growth: <name> could benefit from collaborating more with his classmates when working through problems.
+
+
