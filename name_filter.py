@@ -43,6 +43,9 @@ for line in contents_list:
                 new_line.append(word)
         elif word_stripped in name_list:
             new_line.append("<name>")
+        elif (len(word_stripped) > 2 and word_stripped[-2] == "'"):
+            if word_stripped[:-2] in name_list:
+                new_line.append("<name>'s")
         else:
             new_line.append(word)
     anonymized_list.append(" ".join(new_line))

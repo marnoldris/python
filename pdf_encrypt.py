@@ -28,11 +28,11 @@ if os.path.exists(output):
 
 # %% Open the source file and set up the reader
 pdfFile = open(sys.argv[1], "rb")
-pdfReader = PyPDF2.PdfFileReader(pdfFile)
-pdfWriter = PyPDF2.PdfFileWriter()
+pdfReader = PyPDF2.PdfReader(pdfFile)
+pdfWriter = PyPDF2.PdfWriter()
 
 # %% Build the new, encrypted PDF
-for page_num in range(pdfReader.numPages):
+for page_num in range(len(pdfReader.pages)):
     pdfWriter.addPage(pdfReader.getPage(page_num))
 
 # %% Write the encrypted PDF

@@ -33,8 +33,8 @@ for arg in sys.argv:
         continue
     else:
         pdf_file_name = arg
-#pdfReader = PyPDF2.PdfFileReader(open(sys.argv[1], 'rb'))
-pdfReader = PyPDF2.PdfFileReader(pdf_file_name, 'rb')
+#pdfReader = PyPDF2.PdfReader(open(sys.argv[1], 'rb'))
+pdfReader = PyPDF2.PdfReader(pdf_file_name, 'rb')
 
 # Print a message warning that verbose has been selected, then count down
 # to start.

@@ -76,7 +76,7 @@ if os.path.exists(output_name):
 
 # Open the original pdf and create the reader
 orig_pdf = open(sys.argv[1], 'rb')
-pdf_reader = PyPDF2.PdfFileReader(orig_pdf)
+pdf_reader = PyPDF2.PdfReader(orig_pdf)
 
 # Make sure the requested pages exist in the original PDF
 if (end_page + 1) > len(pdf_reader.pages):
@@ -88,7 +88,7 @@ for num in page_nums:
         exit()
 
 # Create the writer
-pdf_writer = PyPDF2.PdfFileWriter()
+pdf_writer = PyPDF2.PdfWriter()
 
 # Copy the desired pages
 for num in page_nums:
