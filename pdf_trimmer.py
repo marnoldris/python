@@ -7,31 +7,32 @@ import PyPDF2
 # Check to make sure the user is running the program correctly
 if len(sys.argv) != 3:
     print(
-        'Usage: pdf_trimmer <input pdf> <pages n,m,o-q,etc>\n\n'
-        'Page numbers should be separated by a comma (no space)'
-        ', can be duplicated, and will be kept in the order '
-        'given.\n\n'
-        'Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2'
+        "Usage: pdf_trimmer <input pdf> <pages n,m,o-q,etc>\n\n"
+        "Page numbers should be separated by a comma (no space)"
+        ", can be duplicated, and will be kept in the order "
+        "given.\n\n"
+        "Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2\n\n"
+        "To copy all pages, use all instead of page numbers."
     )
-    exit()
+    sys.exit()
 
 
 def parse_arg_nums(a):
-    number_strings = sys.argv[a].split(',')
+    number_strings = sys.argv[a].split(",")
     nums = []
 
     for s in number_strings:
-        if '-' not in s:
+        if "-" not in s:
             nums.append(int(s))
         else:
-            interval = s.split('-')
+            interval = s.split("-")
             # Change the strings into integers
             try:
                 for i in range(2):
                     interval.append(int(interval[i]))
             except ValueError:
-                print('Negative indexing not supported, exiting...')
-                exit()
+                print("Negative indexing not supported, exiting...")
+                sys.exit()
             for i in range(2):
                 del interval[0]
             start = min(interval)
@@ -41,12 +42,23 @@ def parse_arg_nums(a):
     return nums
 
 
-# Get the page number(s) to include
-page_nums = parse_arg_nums(2)
+# Open the original pdf and create the reader
+pdf_reader = PyPDF2.PdfReader(sys.argv[1], "rb")
 
-# Subtract 1 to turn the page numbers into indices
-for i in range(len(page_nums)):
-    page_nums[i] = page_nums[i] - 1
+# Check for encryption, ask for password if so
+if pdf_reader.is_encrypted:
+    password = input("Encryption detected, please enter the password: ")
+    pdf_reader.decrypt(password)
+
+
+# Get the page number(s) to include
+if sys.argv[2] == "all":
+    page_nums = [i for i in range(len(pdf_reader.pages))]
+else:
+    page_nums = parse_arg_nums(2)
+    # Subtract 1 to turn the page numbers into indices
+    for i in range(len(page_nums)):
+        page_nums[i] = page_nums[i] - 1
 
 end_page = max(page_nums)
 
@@ -54,38 +66,34 @@ end_page = max(page_nums)
 # the trimmed page numbers, ending with the .pdf extension
 output_name = f'{sys.argv[1].split(".")[0]}'
 if len(page_nums) == 1:
-    output_name = output_name + f'_page_{page_nums[0] + 1}.pdf'
+    output_name = output_name + f"_page_{page_nums[0] + 1}.pdf"
 elif len(page_nums) > 10:
-    output_name = output_name + '_trimmed.pdf'
+    output_name = output_name + "_trimmed.pdf"
 else:
-    output_name = output_name + '_pages_'
+    output_name = output_name + "_pages_"
     for i in range(len(page_nums)):
         if i + 1 < len(page_nums):
-            output_name = output_name + f'{page_nums[i] + 1}_'
+            output_name = output_name + f"{page_nums[i] + 1}_"
         else:
-            output_name = output_name + f'{page_nums[i] + 1}.pdf'
+            output_name = output_name + f"{page_nums[i] + 1}.pdf"
 
 # Check to see if the file exists, confirm overwrite if it does
 if os.path.exists(output_name):
-    cont = input('Trimmed filename already exists, overwrite? (Y/n)')
-    if cont == '' or cont == 'y' or cont == 'Y':
-        print('Overwriting...')
+    cont = input("Trimmed filename already exists, overwrite? (Y/n)")
+    if cont == "" or cont == "y" or cont == "Y":
+        print("Overwriting...")
     else:
-        print('Cancelling...')
-        exit()
-
-# Open the original pdf and create the reader
-orig_pdf = open(sys.argv[1], 'rb')
-pdf_reader = PyPDF2.PdfReader(orig_pdf)
+        print("Cancelling...")
+        sys.exit()
 
 # Make sure the requested pages exist in the original PDF
 if (end_page + 1) > len(pdf_reader.pages):
-    print('Requested page(s) are out of range, exiting...')
-    exit()
+    print("Requested page(s) are out of range, exiting... (upper bound)")
+    sys.exit()
 for num in page_nums:
     if num < 0:
-        print('Requested page(s) are out of range, exiting...')
-        exit()
+        print("Requested page(s) are out of range, exiting... (lower bound)")
+        sys.exit()
 
 # Create the writer
 pdf_writer = PyPDF2.PdfWriter()
@@ -96,7 +104,7 @@ for num in page_nums:
     pdf_writer.add_page(page_obj)
 
 # Open a blank pdf with the given file name and write the pages.
-output_pdf = open(output_name, 'wb')
+output_pdf = open(output_name, "wb")
 pdf_writer.write(output_pdf)
 output_pdf.close()
-print('Done!')
+print("Done!")
