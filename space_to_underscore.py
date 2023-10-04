@@ -8,7 +8,6 @@ Created on Fri Sep 15 10:04:12 2023
 
 import pyperclip
 
-
 question = input(
     "Enter the string to replace spaces with underscores "
     "(press enter to use clipboard contents): "

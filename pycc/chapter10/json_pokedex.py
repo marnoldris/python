@@ -1,8 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct  3 15:46:16 2023
+
+@author: matthew
+"""
+
 
 import os
 import json
 
-numbers = [i**i for i in range(10)]
 
 pokedex = {
     'charmander': {
@@ -24,26 +31,23 @@ pokedex = {
 ## assign the variable name to the data structures
 ## when you read it in again.
 data_to_save = {
-    'number list': numbers,
     'pokedex': pokedex,       
     }
 
-filename = 'stuff.json'
+filename = 'pokedex.json'
 try:
     with open(filename, 'w') as file:
         json.dump(data_to_save, file)
 except Exception as e:
     print(e, type(e))
-else:
-    print(os.listdir())
 
 try:
     with open(filename, 'r') as file:   # the 'r' is optional, default behavior is read
-        stuff = json.load(file)
+        dex = json.load(file)
 except FileNotFoundError:
     print('File not found!')
 else:
-    pokedex = stuff['pokedex']
+    pokedex = dex['pokedex']
     for k, v in pokedex.items():
         print(f'{k}:')
         for value in v.values():
