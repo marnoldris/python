@@ -15,7 +15,7 @@ def get_sevseg_str(number, min_width=0):
         if numeral == '.':
             rows[0] = ''.join([rows[0], ' '])
             rows[1] = ''.join([rows[1], ' '])
-            rows[2] = ''.join([rows[2], '.'])
+            rows[2] = ''.join([rows[2], chr(9632)])
             continue
         elif numeral == '-':
             rows[0] = ''.join([rows[0], '    '])
