@@ -5,66 +5,80 @@ Created on Thu Oct  5 21:20:51 2023
 
 @author: matthew
 """
+UL = chr(9484)
+UR = chr(9488)
+BL = chr(9492)
+BR = chr(9496)
+H = chr(9472)
+V = chr(9474)
+C = chr(9532)
+CL = chr(9500)
+CR = chr(9508)
+P = chr(9679)
 
+def print_dice(dice):
+    return '\n'.join(dice)
 
 dice = {
         'd6-1': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)}       {chr(9474)}',
-            f'{chr(9474)}   {chr(9679)}   {chr(9474)}',
-            f'{chr(9474)}       {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+    H*7    +UR,
+            V+  '       '  +V,
+            V+'   '+P+'   '+V,
+            V+  '       '  +V,
+            BL+    H*7    +BR,
             ],
         'd6-2a': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)}     {chr(9679)} {chr(9474)}',
-            f'{chr(9474)}       {chr(9474)}',
-            f'{chr(9474)} {chr(9679)}     {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+    H*7    +UR,
+            V+'     '+P+' '+V,
+            V+  '       '  +V,
+            V+' '+P+'     '+V,
+            BL+    H*7    +BR,
             ],
         'd6-2b': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)} {chr(9679)}     {chr(9474)}',
-            f'{chr(9474)}       {chr(9474)}',
-            f'{chr(9474)}     {chr(9679)} {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+    H*7    +UR,
+            V+' '+P+'     '+V,
+            V+  '       '  +V,
+            V+'     '+P+' '+V,
+            BL+    H*7    +BR,
             ],
         'd6-3a': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)}     {chr(9679)} {chr(9474)}',
-            f'{chr(9474)}   {chr(9679)}   {chr(9474)}',
-            f'{chr(9474)} {chr(9679)}     {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+    H*7    +UR,
+            V+'     '+P+' '+V,
+            V+'   '+P+'   '+V,
+            V+' '+P+'     '+V,
+            BL+    H*7    +BR,
             ],
         'd6-3b': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)} {chr(9679)}     {chr(9474)}',
-            f'{chr(9474)}   {chr(9679)}   {chr(9474)}',
-            f'{chr(9474)}     {chr(9679)} {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+    H*7    +UR,
+            V+' '+P+'     '+V,
+            V+'   '+P+'   '+V,
+            V+'     '+P+' '+V,
+            BL+    H*7    +BR,
             ],
         'd6-4': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9474)}       {chr(9474)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+      H*7      +UR,
+            V+' '+P+'   '+P+' '+V,
+            V+    '       '    +V,
+            V+' '+P+'   '+P+' '+V,
+            BL+      H*7      +BR,
             ],
         'd6-5': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9474)}   {chr(9679)}   {chr(9474)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+      H*7      +UR,
+            V+' '+P+'   '+P+' '+V,
+            V+  '   '+P+'   '  +V,
+            V+' '+P+'   '+P+' '+V,
+            BL+      H*7      +BR,
             ],
         'd6-6': [
-            f'{chr(9484)}{chr(9472)*7}{chr(9488)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9474)} {chr(9679)}   {chr(9679)} {chr(9474)}',
-            f'{chr(9492)}{chr(9472)*7}{chr(9496)}',
+            UL+      H*7      +UR,
+            V+' '+P+'   '+P+' '+V,
+            V+' '+P+'   '+P+' '+V,
+            V+' '+P+'   '+P+' '+V,
+            BL+      H*7      +BR,
             ],
         }
-for k, v in dice.items():
-    for line in dice[k]:
-        print(line)
+
+if __name__ == "__main__":
+    for k, v in dice.items():
+        print(print_dice(dice[k]))
+        #print(print_dice(v))
