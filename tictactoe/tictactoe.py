@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+import sys
 
 board = {'1': ' ', '2': ' ', '3': ' ',
          '4': ' ', '5': ' ', '6': ' ',
@@ -48,35 +49,42 @@ x_win = False
 o_win = False
 turn = 'X'
 
-while counter < 9 and win == False:
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print_board(board)
-    print('Turn for ' + turn + '. Move on which space? (1-9)')
+try:
+    while counter < 9 and win == False:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print_board(board)
+        print('Turn for ' + turn + '. Move on which space? (1-9)')
+        
+        while True:
+            move = input('> ')
+            try:
+                move_int = int(move)
+            except:
+                print('Invalid entry. Please enter an integer.')
+                continue
+            if move_int > 0 and move_int < 10 and board[move] == ' ':
+                break
+            else:
+                print('You must enter a number between 1 and 9 that has not' +
+                      ' already been taken.')
+                continue
     
-    while True:
-        move = input('> ')
-        try:
-            move_int = int(move)
-        except:
-            continue
-        if move_int > 0 and move_int < 10 and board[move] == ' ':
-            break
+        board[move] = turn
+        win = check_win()
+        counter += 1
+        if turn == 'X':
+            if win:
+                x_win = True
+                continue
+            turn = 'O'
         else:
-            continue
-
-    board[move] = turn
-    win = check_win()
-    counter += 1
-    if turn == 'X':
-        if win:
-            x_win = True
-            continue
-        turn = 'O'
-    else:
-        if win:
-            o_win = True
-            continue
-        turn = 'X'
+            if win:
+                o_win = True
+                continue
+            turn = 'X'
+except KeyboardInterrupt:
+    print('\nExiting game...')
+    sys.exit()
 
 os.system('cls' if os.name == 'nt' else 'clear')
 print('\nGame over!')
