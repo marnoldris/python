@@ -70,5 +70,5 @@ def get_sevseg_str(number, min_width=0):
 
 
 if __name__ == '__main__':
-    print(get_sevseg_str(13, 3))
-    print(get_sevseg_str(13, 2))
+    print(get_sevseg_str(36, 3))
+    print(get_sevseg_str(36, 2))
