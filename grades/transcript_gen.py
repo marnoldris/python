@@ -95,6 +95,12 @@ def parse_class_name(s) -> str:
         elif 'DT' in class_name:
             dt = re.compile(r'DT')
             class_name = dt.sub('Design Technology', mo.group())
+        
+        # Check for the case of no space between the class name and number
+        no_space = re.compile(r'n(\d)')
+        no_space_mo = no_space.search(class_name)
+        if no_space_mo:
+            class_name = no_space.sub(f'n {no_space_mo.group(1)}', class_name)
 
             
     except AttributeError:
@@ -103,14 +109,21 @@ def parse_class_name(s) -> str:
     return class_name
 
 #%%% Calculate local grade
-def calc_local_grade(s) -> str:
-    if 'N' in s or s == '0':
+def calc_local_grade(l) -> str:
+    if 'N/A' in l[13]:
         return 'N/A'
+    if 'INC' in l[13]:
+        return 'Incomplete'
     try:
-        a = int(s)
+        a = int(l[12])
     except ValueError:
         print('Invalid local grade, please report this error. Exiting...')
         sys.exit()
+    if 'PE' in l[0] or 'Physical' in l[0]:
+        if a >= 3:
+            return 'PASS'
+        else:
+            return 'FAIL'
     if a <= 5:
         local_grade = 'F'
     elif a <= 9:
@@ -154,6 +167,15 @@ def read_csv(in_file) -> list[list[str]]:
     return rows
 #%% Handle args
 
+if len(sys.argv) > 1 and len(sys.argv) < 4:
+    print('Invalid arguments. Usage:\n'
+          '$ transcript_gen.py\n'
+          'or\n'
+          '$ transcript_gen.py report_name input_file.csv output_file.csv\n'
+          'Contact Matthew with questions.\n'
+          'Exiting...'
+    )
+    sys.exit()
 if len(sys.argv) == 4:
     report_name = sys.argv[1]
     input_file = sys.argv[2]
@@ -208,14 +230,14 @@ for row in rows_trimmed:
     if row[0] and not row[3]:   # Row contains only a name
         email = email_gen(row[0])
         emails.append(email)
-    elif not row[0]:            # Row is empty       
+    elif not row[0]:            # Row is empty
         continue
     else:
         output.append([
             email, programme, year, academic_term, report_name,
-                       row[3], parse_class_name(row[0]),
-                       calc_grade_level(row[5]), row[13],
-                       calc_local_grade(row[12]), '', ''
+            row[3], parse_class_name(row[0]),
+            calc_grade_level(row[5]), row[13],
+            calc_local_grade(row), '', ''
         ])
         
 
