@@ -149,8 +149,21 @@ def calc_local_grade(l) -> str:
     return local_grade
 
 #%%% Calculate grade level
-def calc_grade_level(a) -> str:
-    return 'Grade Level'
+def calc_grade_level(l) -> str:
+    # *5 is 10th grade, add 5 to * level
+    # if 11th & 12th, its just 11 and 12
+    #programme_filter = re.compile(r'w\+\s(\w+)')
+    #mo = programme_filter.search(l[0])
+    if 'DP' in l[0]:
+        return 'Grade ' + l[5]
+    elif 'MYP' in l[0]:
+        num_filter = re.compile('\d')
+        mo = num_filter.search(l[5])
+        grade = int(mo.group()) + 5
+        grade_level = str(grade)
+        return 'Grade ' + grade_level
+    
+
 #%%% Read in the csv
 def read_csv(in_file) -> list[list[str]]:
     rows = []
@@ -236,7 +249,7 @@ for row in rows_trimmed:
         output.append([
             email, programme, year, academic_term, report_name,
             row[3], parse_class_name(row[0]),
-            calc_grade_level(row[5]), row[13],
+            calc_grade_level(row), row[13],
             calc_local_grade(row), '', ''
         ])
         
