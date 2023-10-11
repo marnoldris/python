@@ -6,4 +6,4 @@ effectiveawk.pdf
 clipboard_dict.json
 student_names
 narratives.txt
-*.csv
+*.csv*
