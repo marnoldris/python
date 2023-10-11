@@ -35,11 +35,11 @@ try:
         
         if seconds_left == 0:
             print()
-            print('DONE!')
+            print('TIME\'S UP! BOARDS UP!')
             break
         
         print()
-        print('Press CTRL+C to quit...')
+        #print('Press CTRL+C to quit...')
         
         time.sleep(1)
         seconds_left -= 1

@@ -11,7 +11,7 @@ import pyperclip
 question = input(
     "Enter the string to replace spaces with underscores "
     "(press enter to use clipboard contents): "
-)
+    )
 
 if len(question) == 0:
     spaced_string = pyperclip.paste()

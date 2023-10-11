@@ -26,57 +26,57 @@ dice = {
             V+'   '+P+'   '+V,
             V+  '       '  +V,
             BL+    H*7    +BR,
-            ],
+        ],
         'd6-2a': [
             UL+    H*7    +UR,
             V+'     '+P+' '+V,
             V+  '       '  +V,
             V+' '+P+'     '+V,
             BL+    H*7    +BR,
-            ],
+        ],
         'd6-2b': [
             UL+    H*7    +UR,
             V+' '+P+'     '+V,
             V+  '       '  +V,
             V+'     '+P+' '+V,
             BL+    H*7    +BR,
-            ],
+        ],
         'd6-3a': [
             UL+    H*7    +UR,
             V+'     '+P+' '+V,
             V+'   '+P+'   '+V,
             V+' '+P+'     '+V,
             BL+    H*7    +BR,
-            ],
+        ],
         'd6-3b': [
             UL+    H*7    +UR,
             V+' '+P+'     '+V,
             V+'   '+P+'   '+V,
             V+'     '+P+' '+V,
             BL+    H*7    +BR,
-            ],
+        ],
         'd6-4': [
             UL+      H*7      +UR,
             V+' '+P+'   '+P+' '+V,
             V+    '       '    +V,
             V+' '+P+'   '+P+' '+V,
             BL+      H*7      +BR,
-            ],
+        ],
         'd6-5': [
             UL+      H*7      +UR,
             V+' '+P+'   '+P+' '+V,
             V+  '   '+P+'   '  +V,
             V+' '+P+'   '+P+' '+V,
             BL+      H*7      +BR,
-            ],
+        ],
         'd6-6': [
             UL+      H*7      +UR,
             V+' '+P+'   '+P+' '+V,
             V+' '+P+'   '+P+' '+V,
             V+' '+P+'   '+P+' '+V,
             BL+      H*7      +BR,
-            ],
-        }
+        ],
+}
 
 if __name__ == "__main__":
     for k, v in dice.items():
