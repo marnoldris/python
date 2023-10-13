@@ -13,6 +13,7 @@ import os
 import random
 
 home_dir = os.path.expanduser('~')
+called_upon = []
 
 if os.path.exists(f'{home_dir}/Documents/student_lists/{sys.argv[1]}'):
     with open(f'{home_dir}/Documents/student_lists/{sys.argv[1]}') as file:
@@ -33,19 +34,40 @@ def print_students(delay) -> None:
         os.system('cls' if os.name == 'nt' else 'clear')
 
 
-random_number = random.randint(0, len(names)-1)
-
 columns = os.get_terminal_size().columns
-#f = Figlet(font='slant')
+# f = Figlet(font='slant')
 f = Figlet(justify='center')
 f.width = columns
 
-print('Finding a random student.')
+while True:
+    try:
+        print('Finding a random student.')
 
-print_students(0.01)
-print_students(0.1)
-print_students(0.15)
+        random_student = random.randint(0, len(names)-1)
 
-sleep(0.3)
-#print(f.renderText(f'*=* {names[random_number].title()} *=*'.center(columns)))
-print(f.renderText(f'{names[random_number].title()}'))
+        while random_student in called_upon:
+            random_student = random.randint(0, len(names)-1)
+
+        called_upon.append(random_student)
+        if len(called_upon) > 3:
+            del called_upon[0]
+
+        print_students(0.01)
+        print_students(0.1)
+        print_students(0.15)
+
+        sleep(0.3)
+        # print(f.renderText(f'*=* {names[random_student].title()} *=*'.center(columns)))
+        print(f.renderText(f'{names[random_student].title()}'))
+
+        repeat = input('Press return to run the program again.\n'
+                       'CTRL+C to quit.'
+                       )
+        if repeat == '':
+            continue
+        else:
+            break
+
+    except KeyboardInterrupt:
+        print('Exiting...')
+        sys.exit()

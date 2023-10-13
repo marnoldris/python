@@ -10,6 +10,9 @@ import sys
 import os
 import csv
 import re
+import traceback
+
+VERSION = 1.2
 
 #%% TODO
 """
@@ -104,7 +107,9 @@ def parse_class_name(s) -> str:
 
             
     except AttributeError:
-        print('Match not found, please report this issue. Exiting...')
+        traceback.print_exc()
+        print('\n\nMatch not found, please report this issue.\n'
+              'Exiting...')
         sys.exit()
     return class_name
 
@@ -117,7 +122,9 @@ def calc_local_grade(l) -> str:
     try:
         a = int(l[12])
     except ValueError:
-        print('Invalid local grade, please report this error. Exiting...')
+        traceback.print_exc()
+        print('\n\nInvalid local grade, please report this error.\n'
+              'Exiting...')
         sys.exit()
     if 'PE' in l[0] or 'Physical' in l[0]:
         if a >= 3:
@@ -174,11 +181,17 @@ def read_csv(in_file) -> list[list[str]]:
             for row in reader:
                 rows.append(row)
     except FileNotFoundError:
-        print('File not found!')
+        traceback.print_exc()
+        print('\n\nFile not found!')
         sys.exit()
     
     return rows
 #%% Handle args
+
+if len(sys.argv) >= 2:
+    if sys.argv[1] == '--version' or sys.argv[1] == '-v':
+        print(f'Version: {VERSION}')
+        sys.exit()
 
 if len(sys.argv) > 1 and len(sys.argv) < 4:
     print('Invalid arguments. Usage:\n'
