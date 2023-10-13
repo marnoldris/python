@@ -37,11 +37,6 @@ def email_gen(name) -> str:
     
     # Strip the nickname in parentheses
     pattern = re.compile(r'\(.+\)\s')
-    """
-    The \( and \) match opening and closing parentheses.
-    .* matches any number of any characters.
-    The \s matches a space
-    """
     name_subbed = pattern.sub('', name)
     #name_subbed = re.sub(pattern, '', name)
     
@@ -72,12 +67,6 @@ def email_gen(name) -> str:
 def parse_parens(s) -> str:
     """ Parse out a string from between parentheses, exclusive """
     pattern = re.compile(r'\((.+)\)')
-    """
-    The \( and \) match opening and closing parentheses.
-    The ( ) group the result, removing the parentheses themselves (the stuff
-    between the ( ) is what we want, not the matched characters around it).
-    .* matches any number of any characters
-    """
     matches = pattern.findall(s)
     return matches[0]
 
