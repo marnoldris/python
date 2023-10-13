@@ -164,7 +164,7 @@ def calc_grade_level(l) -> str:
     if 'DP' in l[0]:
         return 'Grade ' + l[5]
     elif 'MYP' in l[0]:
-        num_filter = re.compile('\d')
+        num_filter = re.compile(r'\d')
         mo = num_filter.search(l[5])
         grade = int(mo.group()) + 5
         grade_level = str(grade)
