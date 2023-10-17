@@ -2,6 +2,7 @@
 
 import os
 import sys
+import re
 import PyPDF2
 
 # Check to make sure the user is running the program correctly
@@ -15,7 +16,7 @@ if len(sys.argv) != 3:
         "To copy all pages, use all instead of page numbers."
     )
     sys.exit()
-
+test_name = sys.argv[1]
 
 def parse_arg_nums(a):
     number_strings = sys.argv[a].split(",")
@@ -41,9 +42,39 @@ def parse_arg_nums(a):
                 nums.append(i)
     return nums
 
+def name_output() -> str:
+    filename_filter = re.compile(r'([^/]+)(\.pdf)')
+    mo = filename_filter.search(sys.argv[1])
+    if mo:
+        original_name = mo.group(1)
+    else:
+        print('File name not found. Exiting...')
+        sys.exit()
+    if len(page_nums) == 1:
+        output_name = '_'.join([
+            original_name,
+            'page',
+            str(page_nums[0] + 1),
+            ])
+        output_name = ''.join([output_name, '.pdf'])
+    elif len(page_nums) > 10:
+        output_name = '_'.join([original_name, 'trimmed.pdf'])
+    else:
+        outputs = [original_name, 'pages',]
+        for i in range(len(page_nums)):
+            outputs.append(str(page_nums[i] + 1))
+        output_name = '_'.join(outputs)
+        output_name = ''.join([output_name, '.pdf'])
+    
+    return output_name
+
 
 # Open the original pdf and create the reader
-pdf_reader = PyPDF2.PdfReader(sys.argv[1], "rb")
+try:
+    pdf_reader = PyPDF2.PdfReader(sys.argv[1], "rb")
+except FileNotFoundError:
+    print('File not found! Exiting...')
+    sys.exit()
 
 # Check for encryption, ask for password if so
 if pdf_reader.is_encrypted:
@@ -62,20 +93,8 @@ else:
 
 end_page = max(page_nums)
 
-# Split the file name on the file extension dot and append
-# the trimmed page numbers, ending with the .pdf extension
-output_name = f'{sys.argv[1].split(".")[0]}'
-if len(page_nums) == 1:
-    output_name = output_name + f"_page_{page_nums[0] + 1}.pdf"
-elif len(page_nums) > 10:
-    output_name = output_name + "_trimmed.pdf"
-else:
-    output_name = output_name + "_pages_"
-    for i in range(len(page_nums)):
-        if i + 1 < len(page_nums):
-            output_name = output_name + f"{page_nums[i] + 1}_"
-        else:
-            output_name = output_name + f"{page_nums[i] + 1}.pdf"
+# Synthesize the output file name
+output_name = name_output()
 
 # Check to see if the file exists, confirm overwrite if it does
 if os.path.exists(output_name):
