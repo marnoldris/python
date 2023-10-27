@@ -12,23 +12,13 @@ import csv
 import re
 import traceback
 
+#%% Static variables
 VERSION = 1.2
-
-#%% TODO
-"""
-Parse args to ensure proper number, print message and quit if not.
-sys.argv[1] should be Report Name
-sys.argv[2] is input file
-sys.argv[3] is output file
-
-Trim headers
-Parse line 3 for programme, academic year, academic term
-
-concat student email, programme, academic year, academic term, report name, subject group, class name, class grade, term grade, local grade, credit, level
-
-build output
-write output to file
-"""        
+SUBJECT_INDEX = 3       # 3
+CLASS_NAME_INDEX = 0    # 0
+FINAL_GRADE_INDEX = 13  # 13
+SUM_INDEX = 12          # 12
+GRADE_LEVEL_INDEX = 5   # 5     
 
 #%% Functions
 #%%% Email generator
@@ -171,7 +161,7 @@ def read_csv(in_file) -> list[list[str]]:
                 rows.append(row)
     except FileNotFoundError:
         traceback.print_exc()
-        print('\n\nFile not found!')
+        print('\n\nFile not found! Exiting...')
         sys.exit()
     
     return rows
@@ -232,6 +222,31 @@ for i in range(len(rows)):
     
     rows_trimmed.append(rows[i])
 
+#%% Assign indices
+for i in range(len(rows)):
+    for j in range(len(rows[i])):
+        current = rows[i][j]
+        if current.lower() == 'subject':
+            if j != SUBJECT_INDEX:
+                print(f'Subject index changed to {j}')
+                SUBJECT_INDEX = j
+        elif current.lower() == 'class name':
+            if j != CLASS_NAME_INDEX:
+                print(f'Class name index changed to {j}')
+                CLASS_NAME_INDEX = j
+        elif current.lower() == 'final grade':
+            if j != FINAL_GRADE_INDEX:
+                print(f'Final grade index changed to {j}')
+                FINAL_GRADE_INDEX = j
+        elif current.lower() == 'sum':
+            if j != SUM_INDEX:
+                print(f'Sum index changed to {j}')
+                SUM_INDEX = j
+        elif current.lower() == 'grade level':
+            if j != GRADE_LEVEL_INDEX:
+                print(f'Grade level index changed to {j}')
+                GRADE_LEVEL_INDEX = j
+            
 #%% Build the output file
 output = [
     [

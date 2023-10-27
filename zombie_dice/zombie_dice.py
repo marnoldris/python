@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import sys
 import dice
 
 # a list containing the dice needed for the game
@@ -35,7 +36,12 @@ def score(dice_obj):
 def reroll(dice_obj):
     """ Function for rerolling an 'escaped' dice. """
     score_report()
-    question = input('Would you like to reroll one of your escapes? (Y/n)\n')
+    print('Would you like to reroll one of your escapes? (Y/n)\n')
+    try:
+        question = input('> ')
+    except KeyboardInterrupt:
+        print('Keyboard interrupt received, exiting...')
+        sys.exit()
     if question in yes_values:
         result = dice_obj.roll()
         while result in escape_values:
@@ -55,7 +61,7 @@ def game_over_check():
     if score_tracker['shotguns'] > 2:
         print(f'\nGame over! You lost all your brains!')
         score_tracker['brains'] = 0
-        exit()
+        sys.exit()
 
 def score_report():
     """ Function that prints a score report for the player """
@@ -79,7 +85,14 @@ print('In this game, you are a zombie trying to get some yummy, yummy brains.'
 
 # Main gameplay loop starts here
 while True:
-    play = input('\nWould you like to roll the dice? (Y/n)\n')
+    try:
+        print('\nWould you like to roll the dice? (Y/n)\n')
+        print('CTRL+C to quit')
+        play = input('> ')
+    except KeyboardInterrupt:
+        print('Exiting...')
+        sys.exit()
+        
     if play in yes_values:
         for dice in dice_list:
             score(dice)
@@ -95,4 +108,4 @@ while True:
     else:
         print(f'\nGame over! You scored {score_tracker["brains"]}'
               f' {"brains" if score_tracker["brains"] != 1 else "brain"}!')
-        exit()
+        sys.exit()
