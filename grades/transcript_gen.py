@@ -94,18 +94,18 @@ def parse_class_name(s) -> str:
 
 #%%% Calculate local grade
 def calc_local_grade(l) -> str:
-    if 'N/A' in l[13]:
+    if 'N/A' in l[FINAL_GRADE_INDEX]:
         return 'N/A'
-    if 'INC' in l[13]:
+    if 'INC' in l[FINAL_GRADE_INDEX]:
         return 'Incomplete'
     try:
-        a = int(l[12])
+        a = int(l[SUM_INDEX])
     except ValueError:
         traceback.print_exc()
         print('\n\nInvalid local grade, please report this error.\n'
               'Exiting...')
         sys.exit()
-    if 'PE' in l[0] or 'Physical' in l[0]:
+    if 'PE' in l[CLASS_NAME_INDEX] or 'Physical' in l[CLASS_NAME_INDEX]:
         if a >= 3:
             return 'PASS'
         else:
@@ -140,11 +140,11 @@ def calc_grade_level(l) -> str:
     # if 11th & 12th, its just 11 and 12
     #programme_filter = re.compile(r'w\+\s(\w+)')
     #mo = programme_filter.search(l[0])
-    if 'DP' in l[0]:
-        return 'Grade ' + l[5]
-    elif 'MYP' in l[0]:
+    if 'DP' in l[CLASS_NAME_INDEX]:
+        return 'Grade ' + l[GRADE_LEVEL_INDEX]
+    elif 'MYP' in l[CLASS_NAME_INDEX]:
         num_filter = re.compile(r'\d')
-        mo = num_filter.search(l[5])
+        mo = num_filter.search(l[GRADE_LEVEL_INDEX])
         grade = int(mo.group()) + 5
         grade_level = str(grade)
         return 'Grade ' + grade_level
@@ -265,8 +265,8 @@ for row in rows_trimmed:
     else:
         output.append([
             email, programme, year, academic_term, report_name,
-            row[3], parse_class_name(row[0]),
-            calc_grade_level(row), row[13],
+            row[SUBJECT_INDEX], parse_class_name(row[CLASS_NAME_INDEX]),
+            calc_grade_level(row), row[FINAL_GRADE_INDEX],
             calc_local_grade(row), '', ''
         ])
         
