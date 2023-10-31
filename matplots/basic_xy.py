@@ -65,9 +65,8 @@ else:
                   'fourth should be the y negative limit.\n'
                   'Please try again.')
             continue
-        
+
         break
-        
 
 
 fig, ax = plt.subplots(figsize=(12, 10))
@@ -75,7 +74,7 @@ fig, ax = plt.subplots(figsize=(12, 10))
 ax.set_xlabel('x', fontsize=21)
 ax.set_ylabel('y', rotation=0, fontsize=21)
 
-ax.get_yaxis().set_label_coords(-0.03,0.48)
+ax.get_yaxis().set_label_coords(-0.03, 0.48)
 
 # Remove labels
 ax.set_xticklabels([])
