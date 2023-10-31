@@ -40,7 +40,11 @@ else:
         continue_flag = False
         print('Please enter the desired dimensions, with each value separated '
               'by a space. These should be four values:')
-        value_string = input('> ')
+        try:
+            value_string = input('> ')
+        except KeyboardInterrupt:
+            print('Exiting...')
+            sys.exit()
         values = value_string.split(' ')
         int_values = []
         for value in values:
@@ -69,9 +73,17 @@ else:
         break
 
 print('Please enter the desired label for the x-axis:')
-x_label = input('> ')
+try:
+    x_label = input('> ')
+except KeyboardInterrupt:
+    print('Exiting...')
+    sys.exit()
 print('Please enter the desired label for the y-axis:')
-y_label = input('> ')
+try:
+    y_label = input('> ')
+except KeyboardInterrupt:
+    print('Exiting...')
+    sys.exit()
 y_label = ''.join([y_label, ' '])
 
 fig, ax = plt.subplots(figsize=(12, 10))
