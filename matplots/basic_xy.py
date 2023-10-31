@@ -72,6 +72,7 @@ print('Please enter the desired label for the x-axis:')
 x_label = input('> ')
 print('Please enter the desired label for the y-axis:')
 y_label = input('> ')
+y_label = ''.join([y_label, ' '])
 
 fig, ax = plt.subplots(figsize=(12, 10))
 
