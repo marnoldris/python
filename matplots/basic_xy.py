@@ -21,10 +21,10 @@ if len(sys.argv) == 3:
 
 elif len(sys.argv) == 5:
     try:
-        X_POS_LIM = int(sys.argv[1])
-        X_NEG_LIM = int(sys.argv[2])
-        Y_POS_LIM = int(sys.argv[3])
-        Y_NEG_LIM = int(sys.argv[4])
+        X_POS_LIM = int(sys.argv[2])
+        X_NEG_LIM = int(sys.argv[1])
+        Y_POS_LIM = int(sys.argv[4])
+        Y_NEG_LIM = int(sys.argv[3])
     except ValueError:
         print('Invalid arguments, exiting...')
         sys.exit()
@@ -53,26 +53,30 @@ else:
         if continue_flag:
             continue
         try:
-            X_POS_LIM, X_NEG_LIM, Y_POS_LIM, Y_NEG_LIM = int_values
+            X_NEG_LIM, X_POS_LIM, Y_NEG_LIM, Y_POS_LIM = int_values
         except ValueError:
             print('Invalid entry (too many or too few values entered.\n'
                   'Please try again.')
             continue
         if X_POS_LIM <= X_NEG_LIM or Y_POS_LIM <= Y_NEG_LIM:
-            print('Invalid entry, the first value should be the x positive '
-                  'limit, the second should be the x negative limit, '
-                  'the third should be the y positive limit, and the '
-                  'fourth should be the y negative limit.\n'
+            print('Invalid entry, the first value should be the x negative '
+                  'limit, the second should be the x positive limit, '
+                  'the third should be the y negative limit, and the '
+                  'fourth should be the y positive limit.\n'
                   'Please try again.')
             continue
 
         break
 
+print('Please enter the desired label for the x-axis:')
+x_label = input('> ')
+print('Please enter the desired label for the y-axis:')
+y_label = input('> ')
 
 fig, ax = plt.subplots(figsize=(12, 10))
 
-ax.set_xlabel('x', fontsize=21)
-ax.set_ylabel('y', rotation=0, fontsize=21)
+ax.set_xlabel(x_label, fontsize=21)
+ax.set_ylabel(y_label, rotation=0, fontsize=21)
 
 ax.get_yaxis().set_label_coords(-0.03, 0.48)
 
