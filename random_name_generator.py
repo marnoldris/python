@@ -11,6 +11,8 @@ from time import sleep
 import sys
 import os
 import random
+import cursor
+import getpass
 
 home_dir = os.path.expanduser('~')
 called_upon = []
@@ -29,10 +31,10 @@ random.shuffle(names)
 
 def print_students(delay) -> None:
     for name in names:
+        print('Finding a random student.')
         print(f.renderText(name.title().center(columns)))
         sleep(delay)
         os.system('cls' if os.name == 'nt' else 'clear')
-
 
 columns = os.get_terminal_size().columns
 # f = Figlet(font='slant')
@@ -41,15 +43,15 @@ f.width = columns
 
 while True:
     try:
-        print('Finding a random student.')
-
+        cursor.hide()
         random_student = random.randint(0, len(names)-1)
 
         while random_student in called_upon:
             random_student = random.randint(0, len(names)-1)
 
         called_upon.append(random_student)
-        if len(called_upon) > 3:
+        
+        if len(called_upon) > (len(names) // 3):
             del called_upon[0]
 
         print_students(0.01)
@@ -60,14 +62,16 @@ while True:
         # print(f.renderText(f'*=* {names[random_student].title()} *=*'.center(columns)))
         print(f.renderText(f'{names[random_student].title()}'))
 
-        repeat = input('Press return to run the program again.\n'
+        repeat = getpass.getpass('Press return to run the program again.\n'
                        'CTRL+C to quit.'
                        )
         if repeat == '':
             continue
         else:
+            cursor.show()
             break
 
     except KeyboardInterrupt:
         print('Exiting...')
+        cursor.show()
         sys.exit()
