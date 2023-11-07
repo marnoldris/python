@@ -9,6 +9,7 @@ Created on Fri Oct 13 10:49:25 2023
 import matplotlib.pyplot as plt
 import sys
 
+#%% Handle args
 if len(sys.argv) == 3:
     try:
         X_POS_LIM = int(sys.argv[1])
@@ -72,6 +73,7 @@ else:
 
         break
 
+#%% Axis labels
 print('Please enter the desired label for the x-axis:')
 try:
     x_label = input('> ')
@@ -86,14 +88,17 @@ except KeyboardInterrupt:
     sys.exit()
 y_label = ''.join([y_label, ' '])
 
+#%% Build the plot
 fig, ax = plt.subplots(figsize=(12, 10))
 
-ax.set_xlabel(x_label, fontsize=21)
-ax.set_ylabel(y_label, rotation=0, fontsize=21)
+# Note that the x and y axis labels have been reversed, due to how
+# matplotlib places labels.
+ax.set_xlabel(y_label, fontsize=21)
+ax.set_ylabel(x_label, rotation=0, fontsize=21)
 
 ax.get_yaxis().set_label_coords(-0.03, 0.48)
 
-# Remove labels
+# Remove tick labels
 ax.set_xticklabels([])
 ax.set_yticklabels([])
 

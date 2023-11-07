@@ -5,6 +5,10 @@ import sys
 import re
 import PyPDF2
 
+#%% TODO
+# Add last page option ?
+
+#%% Handle args
 # Check to make sure the user is running the program correctly
 if len(sys.argv) != 3:
     print(
@@ -18,6 +22,7 @@ if len(sys.argv) != 3:
     sys.exit()
 test_name = sys.argv[1]
 
+#%% Functions
 def parse_arg_nums(a):
     number_strings = sys.argv[a].split(",")
     nums = []
@@ -68,7 +73,7 @@ def name_output() -> str:
     
     return output_name
 
-
+#%% Open the PDF
 # Open the original pdf and create the reader
 try:
     pdf_reader = PyPDF2.PdfReader(sys.argv[1], "rb")
@@ -81,7 +86,7 @@ if pdf_reader.is_encrypted:
     password = input("Encryption detected, please enter the password: ")
     pdf_reader.decrypt(password)
 
-
+#%% Get page numbers and output name
 # Get the page number(s) to include
 if sys.argv[2] == "all":
     page_nums = [i for i in range(len(pdf_reader.pages))]
@@ -114,6 +119,7 @@ for num in page_nums:
         print("Requested page(s) are out of range, exiting... (lower bound)")
         sys.exit()
 
+#%% Write the PDF
 # Create the writer
 pdf_writer = PyPDF2.PdfWriter()
 

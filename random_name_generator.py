@@ -17,6 +17,9 @@ import getpass
 home_dir = os.path.expanduser('~')
 called_upon = []
 
+if len(sys.argv) <= 1:
+    print('Invalid arguments, please include a file name for the generator.')
+    sys.exit()
 if os.path.exists(f'{home_dir}/Documents/student_lists/{sys.argv[1]}'):
     with open(f'{home_dir}/Documents/student_lists/{sys.argv[1]}') as file:
         name_lines = file.readlines()
