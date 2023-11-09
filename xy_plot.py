@@ -97,7 +97,7 @@ if flip_labels not in no_values:
     y_label = x_label
     x_label = y_placeholder
 """
-if X_NEG_LIM == X_POS_LIM and Y_NEG_LIM == Y_POS_LIM:
+if -1*X_NEG_LIM == X_POS_LIM and -1*Y_NEG_LIM == Y_POS_LIM:
     y_placeholder = y_label
     y_label = x_label
     x_label = y_placeholder
