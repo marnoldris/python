@@ -88,19 +88,37 @@ except KeyboardInterrupt:
     sys.exit()
 y_label = ''.join([y_label, ' '])
 
+"""
+print('Would you like to invert the labels? (Y/n)')
+flip_labels = input('> ')
+no_values = ['n', 'N', 'no', 'No', 'NO']
+if flip_labels not in no_values:
+    y_placeholder = y_label
+    y_label = x_label
+    x_label = y_placeholder
+"""
+if X_NEG_LIM == X_POS_LIM and Y_NEG_LIM == Y_POS_LIM:
+    y_placeholder = y_label
+    y_label = x_label
+    x_label = y_placeholder
+
 #%% Build the plot
 fig, ax = plt.subplots(figsize=(12, 10))
 
 # Note that the x and y axis labels have been reversed, due to how
 # matplotlib places labels.
-ax.set_xlabel(y_label, fontsize=21)
-ax.set_ylabel(x_label, rotation=0, fontsize=21)
+ax.set_xlabel(x_label, fontsize=21)
+ax.set_ylabel(y_label, rotation=0, fontsize=21)
 
 ax.get_yaxis().set_label_coords(-0.03, 0.48)
 
+print('Would you like to include tick labels? (y/N)')
+tick_labels = input('> ')
+yes_values = ['y', 'Y', 'yes', 'Yes']
+if tick_labels not in yes_values:
 # Remove tick labels
-ax.set_xticklabels([])
-ax.set_yticklabels([])
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
 
 ax.set_xticks(range(X_NEG_LIM, X_POS_LIM + 1, 1))
 ax.set_yticks(range(Y_NEG_LIM, Y_POS_LIM + 1, 1))
