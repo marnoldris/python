@@ -98,9 +98,12 @@ if flip_labels not in no_values:
     x_label = y_placeholder
 """
 if -1*X_NEG_LIM == X_POS_LIM and -1*Y_NEG_LIM == Y_POS_LIM:
-    y_placeholder = y_label
-    y_label = x_label
-    x_label = y_placeholder
+    # y_placeholder = y_label
+    # y_label = x_label
+    # x_label = y_placeholder
+    x_label, y_label = y_label, x_label
+else:
+    y_label = ''.join([y_label, ' '*(len(y_label))])
 
 #%% Build the plot
 fig, ax = plt.subplots(figsize=(12, 10))
@@ -116,9 +119,35 @@ print('Would you like to include tick labels? (y/N)')
 tick_labels = input('> ')
 yes_values = ['y', 'Y', 'yes', 'Yes']
 if tick_labels not in yes_values:
-# Remove tick labels
+    # Remove tick labels
     ax.set_xticklabels([])
     ax.set_yticklabels([])
+else:
+    # Set the scale on the tick labels
+    print('Please enter the desired scale for the x-axis ticks (default=1)')
+    x_scale_input = input('> ')
+    if x_scale_input == '':
+        X_SCALE = 1
+    else:
+        try:
+            X_SCALE = int(x_scale_input)
+            x_tick_list = [X_SCALE*i for i in range(X_NEG_LIM, X_POS_LIM + 1)]
+            ax.set_xticklabels(x_tick_list)
+        except ValueError:
+            print('Invalid entry for x scale')
+            sys.exit()
+    print('Please enter the desired scale for the y-axis ticks (default=1)')
+    y_scale_input = input('> ')
+    if y_scale_input == '':
+        Y_SCALE = 1
+    else:
+        try:
+            Y_SCALE = int(y_scale_input)
+            y_tick_list = [Y_SCALE*i for i in range(Y_NEG_LIM, Y_POS_LIM + 1)]
+            ax.set_yticklabels(y_tick_list)
+        except ValueError:
+            print('Invalid entry for y scale')
+            sys.exit()
 
 ax.set_xticks(range(X_NEG_LIM, X_POS_LIM + 1, 1))
 ax.set_yticks(range(Y_NEG_LIM, Y_POS_LIM + 1, 1))
