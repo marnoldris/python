@@ -1,51 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jan 16 14:49:26 2024
 
-import os
+@author: matthew
+"""
+
+# Working with JSON files
+
 import json
 
-numbers = [i**i for i in range(10)]
 
-pokedex = {
-    'charmander': {
-        'move0': 'slash',
-        'move1': 'flamethrower',
-        'move2': 'fire blast',
-        'move3': 'fly',
-        },
-    'bulbasaur': {
-        'move0': 'razor leaf',
-        'move1': 'solar beam',
-        'move2': 'synthesis',
-        'move3': 'bite',
-        },
-    }
-
-## This only stores the data from these structures,
-## not the names of the structures themselves. You
-## assign the variable name to the data structures
-## when you read it in again.
 data_to_save = {
-    'number list': numbers,
-    'pokedex': pokedex,       
+    'thing0': 0,
+    'thing1': 1,
     }
 
-filename = 'stuff.json'
-try:
-    with open(filename, 'w') as file:
-        json.dump(data_to_save, file)
-except Exception as e:
-    print(e, type(e))
-else:
-    print(os.listdir())
+filename = 'save_data.json'
 
-try:
-    with open(filename, 'r') as file:   # the 'r' is optional, default behavior is read
-        stuff = json.load(file)
-except FileNotFoundError:
-    print('File not found!')
-else:
-    pokedex = stuff['pokedex']
-    for k, v in pokedex.items():
-        print(f'{k}:')
-        for value in v.values():
-            print(f'   {value}')
-            
+with open(filename, 'w') as f:
+    json.dump(data_to_save, f, indent=4)
+    
+other_data = {
+    'test': 0,
+    }
+
+with open(filename, 'w') as f:
+    json.dump(other_data, f, indent=4)
+    
+
+with open(filename) as f:
+    opened_data = json.load(f)
+print(type(opened_data))

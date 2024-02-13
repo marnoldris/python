@@ -1,14 +1,16 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 10 14:05:12 2023
+
+@author: matthew
+"""
 
 import dice
 
-d12 = dice.Dice()
+# Make a dice
+d8 = dice.Dice(8)
 
-print(d12.get_value())
-print(d12.roll())
-
-for i in range(70):
-    print(d12.roll())
-
-d100 = dice.Dice(100)
-print(d100.roll())
+# Roll the dice 50 times
+for i in range(500):
+    print(d8.roll())

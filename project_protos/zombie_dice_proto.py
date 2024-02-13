@@ -1,4 +1,5 @@
 import dice
+import sys
 
 # a list containing the dice needed for the game
 dice_list = [dice.Dice(6), dice.Dice(6), dice.Dice(6)]
@@ -87,4 +88,4 @@ while True:
     else:
         # TODO
         # Run a score_report()
-        exit()
+        sys.exit()

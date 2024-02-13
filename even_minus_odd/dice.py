@@ -3,16 +3,16 @@ import random as r
 class Dice:
     """ Simple emulator for an n sided dice. Default is 12 sides. """
 
-    def __init__(self, num_sides=12):
+    def __init__(self, sides=12):
         """ Initializes a new dice. Takes an integer parameter
             for the number of sides. Default is 12. """
-        self.num_sides = num_sides
-        self.value = r.randint(1, self.num_sides)
+        self.sides = sides
+        self.value = r.randint(1, self.sides)
     
     def roll(self) -> int:
         """ Uses random.randint to simulate rolling the dice.
             Returns an integer. """
-        self.value = r.randint(1, self.num_sides)
+        self.value = r.randint(1, self.sides)
         return self.value
     
     def get_value(self) -> int:
@@ -42,16 +42,3 @@ class Dice:
             print('Invalid value for the number of sides')
         else:
             self.sides = new_sides
-
-class Coin(Dice):
-    """ A class to emulate a coin """
-    
-    def __init__(self):
-        super().__init__(2)
-        
-    def flip(self):
-        value = r.randint(1, self.num_sides)
-        return value
-
-c1 = Coin()
-print(c1.flip())

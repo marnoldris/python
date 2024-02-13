@@ -75,6 +75,6 @@ while True:
             break
 
     except KeyboardInterrupt:
-        print('Exiting...')
+        print('\nExiting...')
         cursor.show()
         sys.exit()

@@ -7,7 +7,6 @@ Created on Tue Oct  3 15:46:16 2023
 """
 
 
-import os
 import json
 
 
@@ -26,29 +25,21 @@ pokedex = {
         },
     }
 
-## This only stores the data from these structures,
-## not the names of the structures themselves. You
-## assign the variable name to the data structures
-## when you read it in again.
-data_to_save = {
-    'pokedex': pokedex,       
-    }
 
 filename = 'pokedex.json'
 try:
-    with open(filename, 'w') as file:
-        json.dump(data_to_save, file)
+    with open(filename, 'w') as f:
+        json.dump(pokedex, f)
 except Exception as e:
     print(e, type(e))
 
 try:
-    with open(filename, 'r') as file:   # the 'r' is optional, default behavior is read
-        dex = json.load(file)
+    with open(filename) as f:
+        dex = json.load(f)
 except FileNotFoundError:
     print('File not found!')
 else:
-    pokedex = dex['pokedex']
-    for k, v in pokedex.items():
+    for k, v in dex.items():
         print(f'{k}:')
         for value in v.values():
             print(f'   {value}')
