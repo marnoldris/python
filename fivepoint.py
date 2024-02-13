@@ -15,8 +15,7 @@ def get_fivepoint(data) -> list:
     data.sort()
     fivepoint = []
     
-    data_min = data[0]
-    data_max = data[-1]
+    data_min, data_max = min(data), max(data)
     fivepoint.append(data_min)
     
     q1 = find_middle_value(data[:(len(data) // 2)])
