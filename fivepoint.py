@@ -18,6 +18,8 @@ def get_fivepoint(data) -> list:
     data_min, data_max = min(data), max(data)
     fivepoint.append(data_min)
     
+    # The lower half will always be given by a floor division, because
+    # if it is odd we exclude the middle value anyway.
     q1 = find_middle_value(data[:(len(data) // 2)])
     fivepoint.append(q1)
     
@@ -27,6 +29,8 @@ def get_fivepoint(data) -> list:
     if len(data) % 2 == 0:
         q3 = find_middle_value(data[(len(data) // 2):])
     else:
+        # If the set has an odd number of elements, we need to exclude the 
+        # middle value by adding 1 to our floor division.
         q3 = find_middle_value(data[(len(data) // 2 + 1):])
     fivepoint.append(q3)
     
@@ -38,11 +42,14 @@ def get_fivepoint(data) -> list:
 def find_middle_value(data) -> float:
     data.sort()
     if len(data) % 2 == 0:
+        # If the set has an even number of elements, find the mean of
+        # the two middle numbers.
         low_mid = len(data) // 2 - 1
         high_mid = low_mid + 1
         return statistics.mean([data[low_mid], data[high_mid]])
     else:
-        output = data[math.ceil(len(data) / 2) - 1]
+        #output = data[math.ceil(len(data) / 2) - 1]
+        output = data[len(data) // 2]
         return output
 
 #%% Neatly print the five point summary
