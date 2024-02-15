@@ -8,7 +8,6 @@ Created on Mon Feb 12 12:41:42 2024
 
 import statistics
 import sys
-import math
 
 #%% Generate a list with the five point summary
 def get_fivepoint(data) -> list:
@@ -48,7 +47,6 @@ def find_middle_value(data) -> float:
         high_mid = low_mid + 1
         return statistics.mean([data[low_mid], data[high_mid]])
     else:
-        #output = data[math.ceil(len(data) / 2) - 1]
         output = data[len(data) // 2]
         return output
 
