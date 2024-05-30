@@ -24,6 +24,7 @@ def score(dice_obj):
         dictionary and adds points to the corresponding score
         based on the value of the dice roll """
     result = dice_obj.roll()
+
     if result in brain_values:
         score_tracker['brains'] += 1
         print('You rolled a brain! Yum!')
@@ -44,6 +45,7 @@ def reroll(dice_obj):
         sys.exit()
     if question in yes_values:
         result = dice_obj.roll()
+
         while result in escape_values:
             result = dice_obj.roll()
         if result in brain_values:
@@ -89,6 +91,7 @@ while True:
         print('\nWould you like to roll the dice? (Y/n)\n')
         print('CTRL+C to quit')
         play = input('> ')
+
     except KeyboardInterrupt:
         print('Exiting...')
         sys.exit()

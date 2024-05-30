@@ -10,17 +10,20 @@ import PyPDF2
 
 #%% Handle args
 # Check to make sure the user is running the program correctly
-if len(sys.argv) != 3:
+if len(sys.argv) < 3:
     print(
         "Usage: pdf_trimmer <input pdf> <pages n,m,o-q,etc>\n\n"
         "Page numbers should be separated by a comma (no space)"
         ", can be duplicated, and will be kept in the order "
         "given.\n\n"
         "Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2\n\n"
-        "To copy all pages, use all instead of page numbers."
+        "To copy all pages, use all instead of page numbers.\n\n\n"
+        "Optionally, after the page numbers you can define the "
+        "output file name by adding \"-name <filename>\" after the "
+        "desired page numbers.\n\n"
+        "Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2 -name long_trimmed.pdf"
     )
     sys.exit()
-test_name = sys.argv[1]
 
 #%% Functions
 def parse_arg_nums(a):
@@ -48,6 +51,9 @@ def parse_arg_nums(a):
     return nums
 
 def name_output() -> str:
+    if len(sys.argv) == 5:
+        if sys.argv[3] == '-name':
+            return sys.argv[4]
     filename_filter = re.compile(r'([^/]+)(\.pdf)')
     mo = filename_filter.search(sys.argv[1])
     if mo:
@@ -132,4 +138,4 @@ for num in page_nums:
 output_pdf = open(output_name, "wb")
 pdf_writer.write(output_pdf)
 output_pdf.close()
-print("Done!")
+print(f"Done!\n\nFile written to current working directory:\n{output_name}\n")
