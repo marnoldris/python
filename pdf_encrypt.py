@@ -32,8 +32,8 @@ pdfReader = PyPDF2.PdfReader(pdfFile)
 pdfWriter = PyPDF2.PdfWriter()
 
 # %% Build the new, encrypted PDF
-for page_num in range(len(pdfReader.pages)):
-    pdfWriter.addPage(pdfReader.getPage(page_num))
+for page in pdfReader.pages:
+    pdfWriter.add_page(page)
 
 # %% Write the encrypted PDF
 pdfWriter.encrypt(sys.argv[2])
