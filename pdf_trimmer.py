@@ -10,17 +10,17 @@ import PyPDF2
 
 #%% Handle args
 # Check to make sure the user is running the program correctly
-if len(sys.argv) != 3:
+if len(sys.argv) < 3:
     print(
         "Usage: pdf_trimmer <input pdf> <pages n,m,o-q,etc>\n\n"
         "Page numbers should be separated by a comma (no space)"
         ", can be duplicated, and will be kept in the order "
         "given.\n\n"
         "Ex.: $ pdf_trimmer long.pdf 1,3,3,5-8,2\n\n"
-        "To copy all pages, use all instead of page numbers."
+        "To copy all pages, use all instead of page numbers\n\n."
+        "You can also include a file name optionally as the last argument."
     )
     sys.exit()
-test_name = sys.argv[1]
 
 #%% Functions
 def parse_arg_nums(a):
@@ -78,7 +78,7 @@ def name_output() -> str:
 try:
     pdf_reader = PyPDF2.PdfReader(sys.argv[1], "rb")
 except FileNotFoundError:
-    print('File not found! Exiting...')
+    print(f'File {sys.argv[1]=} not found! Exiting...')
     sys.exit()
 
 # Check for encryption, ask for password if so
@@ -99,7 +99,10 @@ else:
 end_page = max(page_nums)
 
 # Synthesize the output file name
-output_name = name_output()
+if sys.argv[3]:
+    output_name = sys.argv[3]
+else:
+    output_name = name_output()
 
 # Check to see if the file exists, confirm overwrite if it does
 if os.path.exists(output_name):
