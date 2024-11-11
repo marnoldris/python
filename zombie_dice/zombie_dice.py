@@ -4,12 +4,12 @@ import sys
 import dice
 
 # a list containing the dice needed for the game
-dice_list = [dice.Dice(6), dice.Dice(6), dice.Dice(6)]
+dice_list = (dice.Dice(6), dice.Dice(6), dice.Dice(6))
 
-yes_values = ['y', 'Y', '']   # values that will be considered a "yes"
-brain_values = [1, 2, 3]      # dice values that count as a brain
-escape_values = [4, 5]        # dice values that count as an escape
-shotgun_values = [6]          # dice values that count as a shotgun
+yes_values = ('y', 'Y', '')   # values that will be considered a "yes"
+brain_values = (1, 2, 3)      # dice values that count as a brain
+escape_values = (4, 5)        # dice values that count as an escape
+shotgun_values = (6)          # dice values that count as a shotgun
 
 # dictionary to track brains, escapes, and shotguns
 score_tracker = {

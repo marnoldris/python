@@ -99,10 +99,11 @@ else:
 end_page = max(page_nums)
 
 # Synthesize the output file name
-if sys.argv[3]:
+try:
     output_name = sys.argv[3]
-else:
+except IndexError:
     output_name = name_output()
+    print(f'Output name not provided, using default: {output_name}')
 
 # Check to see if the file exists, confirm overwrite if it does
 if os.path.exists(output_name):
