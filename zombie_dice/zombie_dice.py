@@ -9,7 +9,7 @@ dice_list = (dice.Dice(6), dice.Dice(6), dice.Dice(6))
 yes_values = ('y', 'Y', '')   # values that will be considered a "yes"
 brain_values = (1, 2, 3)      # dice values that count as a brain
 escape_values = (4, 5)        # dice values that count as an escape
-shotgun_values = (6)          # dice values that count as a shotgun
+shotgun_values = (6,)          # dice values that count as a shotgun
 
 # dictionary to track brains, escapes, and shotguns
 score_tracker = {
@@ -33,6 +33,7 @@ def score(dice_obj):
     else:
         score_tracker['shotguns'] += 1
         print('You rolled a shotgun! :(')
+
 
 def reroll(dice_obj):
     """ Function for rerolling an 'escaped' dice. """
@@ -58,12 +59,17 @@ def reroll(dice_obj):
         print('\nYou let your victim escape! :v')
         score_tracker['escapes'] += 1
 
+
 def game_over_check():
-    """ Function that checks if the user has gotten three shotguns, thus losing """
+    """
+    Function that checks if the user has gotten
+    three shotguns, thus losing
+    """
     if score_tracker['shotguns'] > 2:
-        print(f'\nGame over! You lost all your brains!')
+        print('\nGame over! You lost all your brains!')
         score_tracker['brains'] = 0
         sys.exit()
+
 
 def score_report():
     """ Function that prints a score report for the player """
@@ -73,7 +79,8 @@ def score_report():
           f' {"escapes" if score_tracker["escapes"] != 1 else "escape"},'
           f' and {score_tracker["shotguns"]}'
           f' {"shotguns" if score_tracker["shotguns"] != 1 else "shotgun"}.'
-    )
+          )
+
 
 """ Print the rules of the game """
 print('In this game, you are a zombie trying to get some yummy, yummy brains.'
@@ -83,7 +90,7 @@ print('In this game, you are a zombie trying to get some yummy, yummy brains.'
       ' roll an escapee, you can choose to "give chase" and roll again.\nThe'
       ' goal is to get as many brains as you can, then quit while you\'re'
       ' "ahead"!'
-)
+      )
 
 # Main gameplay loop starts here
 while True:
@@ -95,17 +102,17 @@ while True:
     except KeyboardInterrupt:
         print('Exiting...')
         sys.exit()
-        
+
     if play in yes_values:
-        for dice in dice_list:
-            score(dice)
+        for die in dice_list:
+            score(die)
 
         game_over_check()
 
-        for dice in dice_list:
-            if dice.get_value() in escape_values:
-                reroll(dice)
-        
+        for die in dice_list:
+            if die.get_value() in escape_values:
+                reroll(die)
+
         game_over_check()
         score_report()
     else:

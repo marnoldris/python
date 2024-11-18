@@ -53,7 +53,7 @@ try:
     while counter < 9 and win == False:
         os.system('cls' if os.name == 'nt' else 'clear')
         print_board(board)
-        print('Turn for ' + turn + '. Move on which space? (1-9)')
+        print(f'Turn for {turn}. Move on which space? (1-9)')
         
         invalid_entries = 0
         while True:
@@ -71,8 +71,8 @@ try:
             if move_int > 0 and move_int < 10 and board[move] == ' ':
                 break
             else:
-                print('You must enter a number between 1 and 9 that has not' +
-                      ' already been taken.')
+                print('You must enter a number between 1 and 9 '
+                      'that has not already been taken.')
                 invalid_entries += 1
                 continue
     
