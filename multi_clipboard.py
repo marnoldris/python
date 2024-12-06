@@ -16,7 +16,7 @@ try:
     path = os.path.dirname(os.path.abspath(__file__))
     logfile = os.path.join(
         path,
-        'multiclip.py.log'
+        'multi_clipboard.py.log'
         )
 
 except ImportError as e:
