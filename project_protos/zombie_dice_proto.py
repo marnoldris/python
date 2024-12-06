@@ -9,10 +9,9 @@ brain_values = (1, 2, 3)      # dice values that count as a brain
 escape_values = (4, 5)        # dice values that count as an escape
 shotgun_values = (6)          # dice values that count as a shotgun
 
-# dictionary to track brains, escapes, and shotguns
+# dictionary to track brains and shotguns
 score_tracker = {
     'brains': 0,
-    'escapes': 0,
     'shotguns': 0,
 }
 
@@ -25,8 +24,8 @@ def score(dice_obj):
     """
     # TODO
     # Roll the dice object
-    # Based on the value of the roll, add one to brains,
-    # escapes, or shotguns (escapes will be handled in another function).
+    # Based on the value of the roll, add one to brains
+    # or shotguns (escapes will be handled in another function).
     # Each time a die is scored it should print a cute message
     # to the player so they know what they rolled (brain,
     # escape, or shotgun)
@@ -61,7 +60,7 @@ def score_report():
     """
     # TODO
     # Print a message to the player that tells them how many
-    # brains, escapes, and shotguns they have. Remember to 
+    # brains and shotguns they have. Remember to 
     # account for the "one case." For example, if they have
     # 3 brains, you would print "You currently have 3 brains..."
     # However, if they have one brain, you would print
@@ -81,7 +80,7 @@ while True:
         # TODO
         # Roll each of the three dice with your score() function
         # Check if the player loses the game
-        # Run your reroll function for each of the dice
+        # Check each dice for rerolls and run the reroll function if needed.
         # Check if the player loses the game
         # Run a score_report()
         pass

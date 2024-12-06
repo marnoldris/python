@@ -1,20 +1,35 @@
-#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb  1 15:37:13 2024
+
+@author: matthew
+"""
 
 try:
     from datetime import datetime
-    import pyperclip
     import sys
     import json
     import os
-    import pyautogui    # Optional for automatic pasting.
+    import pyclip
+    import pyautogui
+
+    path = os.path.dirname(os.path.abspath(__file__))
+    logfile = os.path.join(
+        path,
+        'multiclip.py.log'
+        )
+
 except ImportError as e:
     print(str(e))
-    with open(f'{os.path.expanduser("~")}/multi_clipboard.py.log', 'a') as f:
+    with open(logfile, 'a') as f:
         f.write(f'\n{datetime.now()}: {str(e)}\n')
     sys.exit()
 
-# File name for our dictionary; it should be stored in the user's home folder.
-filename = f'{os.path.expanduser("~")}/clipboard_dict.json'
+# File name for our dictionary; it should be stored in the script's folder.
+filename = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'clipboard_dict.json'
+    )
 
 # Load in the dictionary, or create the file and data if it isn't found.
 try:
@@ -27,7 +42,7 @@ except FileNotFoundError:
         '4': '', '5': '', '6': '',
         '7': '', '8': '', '9': '',
         '0': '',
-        }
+    }
     with open(filename, 'w') as f:
         json.dump(new_dict, f, indent=4)
     with open(filename) as f:
@@ -76,9 +91,9 @@ if len(sys.argv) < 2:
         '<position (0-9)>\n <value (optional)>\n'
         '    Note: if value is not included, the script will copy the '
         'currently selected text.\n'
-        )
+    )
     print(usage_instructions)
-    with open(f'{os.path.expanduser("~")}/multi_clipboard.py.log', 'a') as f:
+    with open(logfile, 'a') as f:
         f.write(f'\n{datetime.now()}: {usage_instructions}\n')
     sys.exit()
 
@@ -93,15 +108,24 @@ if sys.argv[1] == '-a':
     elif len(sys.argv) == 3:
         # If no value is included, default to using the current
         # clipboard contents.
+
+        # Send ctrl+c
         copy_selected()
-        clipboard_contents = pyperclip.paste()
+
+        # Get clipboard contents and send them to the function
+        clipboard_contents = pyclip.paste(text=True)
+
         change_value(sys.argv[2], clipboard_dict, clipboard_contents)
 
 # If the only argument is a key, grab the value and paste it.
 elif sys.argv[1] != '-a':
     try:
-        pyperclip.copy(f'{clipboard_dict[sys.argv[1]]}')
+        # Get the desired clipboard contents
+        output = pyclip.copy(clipboard_dict[sys.argv[1]])
+
+        # Paste it
         paste_output()
+
     except KeyError:
         print(f'Index "{sys.argv[1]}" is invalid, please provide a valid '
               'index.\n Exiting...')
