@@ -5,10 +5,10 @@ import sys
 import re
 import PyPDF2
 
-#%% TODO
+# %% TODO
 # Add last page option ?
 
-#%% Handle args
+# %% Handle args
 # Check to make sure the user is running the program correctly
 if len(sys.argv) < 3:
     print(
@@ -22,7 +22,9 @@ if len(sys.argv) < 3:
     )
     sys.exit()
 
-#%% Functions
+# %% Functions
+
+
 def parse_arg_nums(a):
     number_strings = sys.argv[a].split(",")
     nums = []
@@ -47,6 +49,7 @@ def parse_arg_nums(a):
                 nums.append(i)
     return nums
 
+
 def name_output() -> str:
     filename_filter = re.compile(r'([^/]+)(\.pdf)')
     mo = filename_filter.search(sys.argv[1])
@@ -60,7 +63,7 @@ def name_output() -> str:
             original_name,
             'page',
             str(page_nums[0] + 1),
-            ])
+        ])
         output_name = ''.join([output_name, '.pdf'])
     elif len(page_nums) > 10:
         output_name = '_'.join([original_name, 'trimmed.pdf'])
@@ -70,10 +73,11 @@ def name_output() -> str:
             outputs.append(str(page_nums[i] + 1))
         output_name = '_'.join(outputs)
         output_name = ''.join([output_name, '.pdf'])
-    
+
     return output_name
 
-#%% Open the PDF
+
+# %% Open the PDF
 # Open the original pdf and create the reader
 try:
     pdf_reader = PyPDF2.PdfReader(sys.argv[1], "rb")
@@ -86,7 +90,7 @@ if pdf_reader.is_encrypted:
     password = input("Encryption detected, please enter the password: ")
     pdf_reader.decrypt(password)
 
-#%% Get page numbers and output name
+# %% Get page numbers and output name
 # Get the page number(s) to include
 if sys.argv[2] == "all":
     page_nums = [i for i in range(len(pdf_reader.pages))]
@@ -123,7 +127,7 @@ for num in page_nums:
         print("Requested page(s) are out of range, exiting... (lower bound)")
         sys.exit()
 
-#%% Write the PDF
+# %% Write the PDF
 # Create the writer
 pdf_writer = PyPDF2.PdfWriter()
 

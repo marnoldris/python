@@ -20,21 +20,38 @@ called_upon = []
 if len(sys.argv) <= 1:
     print('Invalid arguments, please include a file name for the generator.')
     sys.exit()
-if os.path.exists(f'{home_dir}/Documents/student_lists/{sys.argv[1]}'):
-    with open(f'{home_dir}/Documents/student_lists/{sys.argv[1]}') as file:
+if os.path.exists(sys.argv[1]):
+    with open(sys.argv[1]) as file:
         name_lines = file.readlines()
+else:
+    print('File not found, exiting...')
+    sys.exit()
 
+# %% Parse input file
 names = []
-for line in name_lines:
-    first_name = line.split(',')[1].strip()
-    names.append(first_name)
+
+print('Are the names in <Last name>, <First name> format? (y/N)')
+try:
+    format_q = input('> ').lower()
+except KeyboardInterrupt:
+    print('Exiting...')
+    sys.exit()
+
+if format_q in ('y', 'yes'):
+    for line in name_lines:
+        first_name = line.split(',')[1].strip()
+        last_name = line.split(',')[0].strip()
+        names.append(f'{first_name} {last_name}')
+else:
+    for line in name_lines:
+        names.append(line.strip())
 
 random.shuffle(names)
 
 
 def print_students(delay) -> None:
     for name in names:
-        print('Finding a random student.')
+        print('Finding a random selection.')
         print(f.renderText(name.title().center(columns)))
         sleep(delay)
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -54,8 +71,8 @@ while True:
 
         called_upon.append(random_student)
         
-        if len(called_upon) > (len(names) // 3):
-            del called_upon[0]
+        #if len(called_upon) > (len(names) // 3):
+        #    del called_upon[0]
 
         print_students(0.01)
         print_students(0.1)

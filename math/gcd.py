@@ -18,4 +18,5 @@ def gcd(a, b):
 n1 = int(input('Enter a number: '))
 n2 = int(input('Enter another number: '))
 
-print(f'Greatest common divisor between {n1} and {n2} is: {gcd(n1, n2)}')
+print(f'Greatest common divisor between {n1} and {n2} is:'
+      f' {gcd(n1, n2)}')
