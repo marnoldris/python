@@ -20,7 +20,8 @@ if len(sys.argv) <= 1:
     sys.exit()
 if os.path.exists(sys.argv[1]):
     with open(sys.argv[1]) as file:
-        name_lines = file.readlines()
+        raw_lines = file.readlines()
+        name_lines = [line for line in raw_lines if line.strip()]
 else:
     print('File not found, exiting...')
     sys.exit()
