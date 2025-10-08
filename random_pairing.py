@@ -12,7 +12,8 @@ import random
 
 
 # %% Read input file
-home_dir = os.path.expanduser('~')
+
+# home_dir = os.path.expanduser('~')
 
 if len(sys.argv) <= 1:
     print('Invalid arguments, please include a file name for the generator.')
@@ -28,14 +29,16 @@ else:
 # %% Parse input file
 names = []
 
+"""
 print('Are the names in <Last name>, <First name> format? (y/N)')
 try:
     format_q = input('> ').lower()
 except KeyboardInterrupt:
     print('Exiting...')
     sys.exit()
+"""
 
-if format_q in ('y', 'yes'):
+if ',' in name_lines[0]:
     for line in name_lines:
         first_name = line.split(',')[1].strip()
         last_name = line.split(',')[0].strip()
@@ -51,13 +54,22 @@ random.shuffle(names)
 
 pairs = []
 
+if len(names) % 2 == 1:
+    tmp = (
+        names.pop().title(),
+        names.pop().title(),
+        names.pop().title()
+    )
+    pairs.append(tmp)
+
 while names:
-    tmp = (names.pop(), names.pop())
+    tmp = (names.pop().title(), names.pop().title())
     pairs.append(tmp)
 
 output_list = []
+tmp_string = ''
 for pair in pairs:
-    output_list.append(pair[0].title() + ' and ' + pair[1].title())
+    output_list.append(' and '.join(pair))
 
 output_string = '\n'.join(output_list)
 print('\n\n' + output_string + '\n\n')
@@ -91,3 +103,6 @@ if save_file in ('y', 'yes'):
         with open(file_name, 'w') as f:
             f.write(output_string)
     print('Exiting...')
+else:
+    print('File not written, exiting...')
+    sys.exit()
