@@ -13,10 +13,23 @@ import random
 
 # %% Read input file
 
-# home_dir = os.path.expanduser('~')
-
 if len(sys.argv) <= 1:
-    print('Invalid arguments, please include a file name for the generator.')
+    print(
+        'Invalid arguments, please include a file name for the generator.\n\n'
+        'The file can be a vertical list of first names, or a vertical list '
+        'of names in the form\n'
+        '<Last Name>, <First Name>\n\n'
+        'For example:\n'
+        'carl\n'
+        'katia\n'
+        'lucia\n\n'
+        'or\n\n'
+        'warburton, carl\n'
+        'grim, katia\n'
+        'mar, lucia\n'
+        '\n'
+        'Usage: $ random_pairing.py <filename>'
+    )
     sys.exit()
 if os.path.exists(sys.argv[1]):
     with open(sys.argv[1]) as file:
@@ -55,6 +68,7 @@ random.shuffle(names)
 
 pairs = []
 
+# Set up a trio if there are an odd number of students
 if len(names) % 2 == 1:
     tmp = (
         names.pop().title(),
@@ -63,17 +77,23 @@ if len(names) % 2 == 1:
     )
     pairs.append(tmp)
 
+# Pair up the students and add them to the list of pairs
 while names:
     tmp = (names.pop().title(), names.pop().title())
     pairs.append(tmp)
 
+# Make a list that looks nicer to output
 output_list = []
 tmp_string = ''
 for pair in pairs:
     output_list.append(' and '.join(pair))
 
+# Make one big string to print and potentially save to a file
 output_string = '\n'.join(output_list)
 print('\n\n' + output_string + '\n\n')
+
+
+# %% Ask to save the file
 
 print('Would you like to save the list to a file? (y/N)')
 try:

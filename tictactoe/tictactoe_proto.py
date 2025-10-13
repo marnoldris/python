@@ -61,5 +61,6 @@ TODO: Write a for loop that runs for the maximum
 number of possible moves. This is your main gameplay
 loop. The player should be asked to enter their move,
 then update the game board with their move. Print
-the game board afterward.
+the game board afterward and alternate to the next
+player.
 """
