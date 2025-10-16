@@ -64,6 +64,7 @@ def print_students(delay) -> None:
         sleep(delay)
         os.system('cls' if os.name == 'nt' else 'clear')
 
+
 columns = os.get_terminal_size().columns
 # f = Figlet(font='slant')
 f = Figlet(justify='center')
@@ -72,16 +73,16 @@ f.width = columns
 while True:
     try:
         cursor.hide()
-        #random_student = random.randint(0, len(names)-1)
+        # random_student = random.randint(0, len(names)-1)
         random_student = random.choice(names)
 
         while random_student in called_upon:
-            #random_student = random.randint(0, len(names)-1)
+            # random_student = random.randint(0, len(names)-1)
             random_student = random.choice(names)
 
         called_upon.append(random_student)
-        
-        if (len(called_upon) > (len(names) // 3)) and rep == True:
+
+        if (len(called_upon) > (len(names) // 3)) and rep is True:
             del called_upon[0]
 
         print_students(0.01)
@@ -90,12 +91,12 @@ while True:
 
         sleep(0.3)
         # print(f.renderText(f'*=* {names[random_student].title()} *=*'.center(columns)))
-        #print(f.renderText(f'{names[random_student].title()}'))
+        # print(f.renderText(f'{names[random_student].title()}'))
         print(f.renderText(f'{random_student.title()}'))
 
         repeat = getpass.getpass('Press return to run the program again.\n'
-                       'CTRL+C to quit.'
-                       )
+                                 'CTRL+C to quit.'
+                                 )
         if repeat == '':
             continue
         else:

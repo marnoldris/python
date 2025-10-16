@@ -19,7 +19,7 @@ output = f'{sys.argv[1].split(".")[0]}' + "_enc.pdf"
 # %% Check if the file exists and asking to overwrite
 yes_values = ["", "Y", "y"]
 if os.path.exists(output):
-    cont = input("Encrypted filename already exists, overwrite? (Y/n): ")
+    cont = input(f"Encrypted filename {output} already exists, overwrite? (Y/n): ")
     if cont in yes_values:
         print("Overwriting...")
     else:
